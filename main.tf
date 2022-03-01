@@ -20,7 +20,9 @@ module "network" {
 module "s3_bucket" {
   source                  = "./modules/s3"
   bucket                  = var.bucket
-  tags                    = var.set_custom_tags
-  vpc_id                  = module.network.vpc_id
+  set_custom_tags         = var.set_custom_tags
   set_s3_gateway_endpoint = var.set_s3_gateway_endpoint
+  vpc_id                  = module.network.vpc_id
+  public_route_table_ids  = module.network.public_route_table_ids
+  private_route_table_ids = module.network.private_route_table_ids
 }

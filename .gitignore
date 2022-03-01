@@ -51,5 +51,5 @@ node_modules/
 # Optional npm cache directory
 .npm
 
-# Environment variables
-*.env
+# Ignore environment variables
+.env

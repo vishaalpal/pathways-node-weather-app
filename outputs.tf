@@ -70,6 +70,16 @@ output "private_nat_gateway_route_ids" {
   value       = module.network.private_nat_gateway_route_ids
 }
 
+output "private_route_table_ids" {
+  description = "List of IDs of private route tables"
+  value       = module.network.private_route_table_ids
+}
+
+output "public_route_table_ids" {
+  description = "List of IDs of public route tables"
+  value       = module.network.public_route_table_ids
+}
+
 ########################################################################################################################
 ### S3 module outputs
 ########################################################################################################################
