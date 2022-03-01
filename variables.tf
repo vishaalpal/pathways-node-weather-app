@@ -11,7 +11,7 @@ variable "set_custom_tags" {
   type        = map(string)
   description = "Use tags to identify project resources"
   default = {
-    Student      = "vishaalpal"
+    Student_Name = "Vishaal Pal"
     Project_Name = "pathways-node-weather-app-quick-start"
     Pathway      = "Contino Infra Engineer to Cloud Engineer Pathway"
   }
@@ -41,7 +41,7 @@ variable "create_public_subnets" {
 variable "get_azs" {
   type        = list(string)
   description = "A list of availability zones names or ids in the region"
-  default     = ["ap-northeast-1a", "ap-northeast-1c", "ap-northeast-1d"]
+  default     = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
 }
 
 variable "create_igw" {
@@ -69,11 +69,11 @@ variable "create_nat_gateway_per_az" {
 variable "bucket" {
   type        = string
   description = "Specifies the name of an S3 Bucket"
-  default     = "vishaalpal-pathwaysdojoinfra-weatherapp-tf-bucket"
+  default     = "vishaalpal-pathways-node-weather-app-quick-start"
 }
 
 variable "set_s3_gateway_endpoint" {
   type        = string
   description = "Specifies the service name for the gateway endpoint"
-  default     = "com.amazonaws.ap-northeast-1.s3"
+  default     = "com.amazonaws.eu-west-1.s3"
 }
