@@ -1,7 +1,7 @@
 ########################################################################################################################
 ### Reference the network module
 ########################################################################################################################
-module "network" {
+module "aws_vpc" {
   source                 = "terraform-aws-modules/vpc/aws"
   name                   = var.set_username_prefix
   cidr                   = var.set_vpc_cidr_range
@@ -17,12 +17,12 @@ module "network" {
 ########################################################################################################################
 ### Reference the s3_bucket module
 ########################################################################################################################
-module "s3_bucket" {
-  source                  = "./modules/s3"
+module "aws_s3" {
+  source                  = "./modules/aws/s3"
   bucket                  = var.bucket
   set_custom_tags         = var.set_custom_tags
   set_s3_gateway_endpoint = var.set_s3_gateway_endpoint
-  vpc_id                  = module.network.vpc_id
-  public_route_table_ids  = module.network.public_route_table_ids
-  private_route_table_ids = module.network.private_route_table_ids
+  vpc_id                  = module.aws_vpc.vpc_id
+  public_route_table_ids  = module.aws_vpc.public_route_table_ids
+  private_route_table_ids = module.aws_vpc.private_route_table_ids
 }
