@@ -1,4 +1,4 @@
-name: deploy-weather-app
+name: Weather-App-Build
 on:
   push:
     branches:
@@ -14,56 +14,37 @@ on:
       - 'application/package.json'
       - 'application/weather-app-dockerfile'
 jobs:
-  ecr_login:
+  build_weather_app:
     defaults:
       run:
         working-directory: ./application
     runs-on: ubuntu-latest
-    env:
-      AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-      AWS_REGION: ${{ secrets.AWS_REGION }}
-      ECR_REPO_NAME:  ${{ secrets.ECR_REPO_NAME }} 
+    name: Build and push image to Amazon ECR
     steps:
-    - uses: actions/checkout@v2
-    - name: ECR_Login
-      run: make ecr_login       
+      - name: Checkout_Repo
+        uses: actions/checkout@v2
 
-  build_docker_image:
-    defaults:
-      run:
-        working-directory: ./application
-    environment:
-      name: approval
-    needs: ecr_login
-    runs-on: ubuntu-latest
-    env:
-      AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-      AWS_REGION: ${{ secrets.AWS_REGION }}
-      ECR_REPO_NAME:  ${{ secrets.ECR_REPO_NAME }} 
-    steps:
-    - uses: actions/checkout@v2
-    - name: ECR_Login
-      run: make ecr_login
-    - name: Build_Docker_Image
-      run: make build_docker_image
-    
-    push_docker_image:
-      defaults:
-        run:
-          working-directory: ./application
-      environment:
-        name: approval
-      needs: build_docker_image
-      runs-on: ubuntu-latest
-      env:
-        AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-        AWS_REGION: ${{ secrets.AWS_REGION }}
-        ECR_REPO_NAME:  ${{ secrets.ECR_REPO_NAME }}
-      steps:
-      - uses: actions/checkout@v2
-      - name: Build_Docker_Image
+      - name: Log in to Amazon ECR
+        run: make ecr_login
+        env:
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          ECR_REPO_NAME: ${{ secrets.ECR_REPO_NAME }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN:  ${{ secrets.AWS_SESSION_TOKEN }} 
+
+      - name: Build weather-app image
+        env:
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          ECR_REPO_NAME: ${{ secrets.ECR_REPO_NAME }}
         run: make build_docker_image
-      - name: Push_Docker_image
+
+      - name: Push weather-app image to ECR
+        env:
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          ECR_REPO_NAME: ${{ secrets.ECR_REPO_NAME }}
         run: make push_docker_image
-
-
+        
