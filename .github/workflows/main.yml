@@ -8,6 +8,7 @@ on:
       - 'orchestration/Makefile'
       - '.github/workflows/**'
       - 'orchestration/*dockerfile'
+      - 'orchestration/.env'
       - 'infrastructure/modules/**'
       - 'infrastructure/**.tf'
 jobs:
