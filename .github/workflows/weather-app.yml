@@ -4,14 +4,15 @@ on:
     branches:
       - master
     paths:
-     - '.github/workflows/weather-app.yaml'
-      - 'application/weather-app-dockerfile'
+      - '.github/workflows/**'
+      - 'application/public/**'
+      - 'application/src/**'
+      - 'application/templates/**'
+      - 'application/.env'
       - 'application/Makefile'
-      - 'application/public/*'
-      - 'application/src/*'
-      - 'application/templates/*'
       - 'application/package-lock.json'
       - 'application/package.json'
+      - 'application/weather-app-dockerfile'
 jobs:
   build:
     runs-on: ubuntu-latest
