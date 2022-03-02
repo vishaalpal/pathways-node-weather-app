@@ -1,0 +1,50 @@
+name: deploy-weather-app
+on:
+  push:
+    branches:
+      - master
+    paths:
+     - '.github/workflows/weather-app.yaml'
+      - 'application/weather-app-dockerfile'
+      - 'application/Makefile'
+      - 'application/public/*'
+      - 'application/src/*'
+      - 'application/templates/*'
+      - 'application/package-lock.json'
+      - 'application/package.json'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build and push docker image to Amazon ECR
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Login to Amazon ECR
+        working-directory: ./application
+        run: make ecr_login
+        env:
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          ECR_REPO_NAME: ${{ secrets.ECR_REPO_NAME }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN:  ${{ secrets.AWS_SESSION_TOKEN }} 
+
+      - name: Build docker image
+        working-directory: ./application
+        env:
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          ECR_REPO_NAME: ${{ secrets.ECR_REPO_NAME }}
+        run: make build_docker_image
+
+      - name: Push docker image to Amazon ECR
+        working-directory: ./application
+        env:
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          ECR_REPO_NAME: ${{ secrets.ECR_REPO_NAME }}
+        run: make push_docker_image
+
+
