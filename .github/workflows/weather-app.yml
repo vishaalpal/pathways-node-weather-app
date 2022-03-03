@@ -1,4 +1,4 @@
-name: Weather-App-Build
+name: build_weather_app
 on:
   workflow_run:
     workflows: ["Deploy"]
