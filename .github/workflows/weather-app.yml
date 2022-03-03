@@ -23,10 +23,24 @@ jobs:
     environment:
       name: approval
     runs-on: ubuntu-latest
-    name: Build and push image to Amazon ECR
+    name: Build and push docker image to Amazon ECR
     steps:
       - name: Checkout_Repo
         uses: actions/checkout@v2
+
+      - name: Build docker image
+        env:
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          ECR_REPO_NAME: ${{ secrets.ECR_REPO_NAME }}
+        run: make build_docker_image
+      
+      - name: Tag docker image
+        env: 
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          ECR_REPO_NAME: ${{ secrets.ECR_REPO_NAME }}
+        run: make tag_docker_image
 
       - name: Log in to Amazon ECR
         run: make ecr_login
@@ -38,14 +52,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_SESSION_TOKEN:  ${{ secrets.AWS_SESSION_TOKEN }} 
 
-      - name: Build weather-app image
-        env:
-          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          ECR_REPO_NAME: ${{ secrets.ECR_REPO_NAME }}
-        run: make build_docker_image
-
-      - name: Push weather-app image to ECR
+      - name: Push docker image to ECR
         env:
           AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
