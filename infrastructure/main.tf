@@ -1,5 +1,5 @@
 ########################################################################################################################
-### Reference the network module
+### Reference the aws_vpc module
 ########################################################################################################################
 module "aws_vpc" {
   source                 = "terraform-aws-modules/vpc/aws"
@@ -15,7 +15,7 @@ module "aws_vpc" {
 }
 
 ########################################################################################################################
-### Reference the s3_bucket module
+### Reference the aws_s3 module
 ########################################################################################################################
 module "aws_s3" {
   source                  = "./modules/aws/s3"
@@ -25,4 +25,11 @@ module "aws_s3" {
   vpc_id                  = module.aws_vpc.vpc_id
   public_route_table_ids  = module.aws_vpc.public_route_table_ids
   private_route_table_ids = module.aws_vpc.private_route_table_ids
+}
+
+module "fargate" {
+  source              = "./modules/aws/fargate"
+  set_username_prefix = var.set_username_prefix
+  set_custom_tags     = var.set_custom_tags
+  set_ecr_repo_name   = var.set_ecr_repo_name
 }

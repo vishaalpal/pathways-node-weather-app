@@ -4,76 +4,84 @@
 variable "set_username_prefix" {
   type        = string
   description = "Name to be used on all the resources as identifier"
-  default     = "vishaalpal"
+  default     = null
 }
 
 variable "set_custom_tags" {
   type        = map(string)
   description = "Use tags to identify project resources"
   default = {
-    Student_Name = "Vishaal Pal"
-    Project_Name = "pathways-node-weather-app-quick-start"
-    Pathway      = "Contino Infra Engineer to Cloud Engineer Pathway"
+    Student_Name = null
+    Project_Name = null
+    Pathway      = null
   }
 }
 
 ########################################################################################################################
-### Network module variables
+### aws_vpc module variables
 ########################################################################################################################
 variable "set_vpc_cidr_range" {
   type        = string
   description = "The CIDR block for the VPC. Default value is a valid CIDR, but not acceptable by AWS and should be overridden"
-  default     = "10.0.1.0/24"
+  default     = null
 }
 
 variable "create_private_subnets" {
   type        = list(string)
   description = "A list of private subnets inside the VPC"
-  default     = ["10.0.1.0/26", "10.0.1.64/26", "10.0.1.128/26"]
+  default     = null
 }
 
 variable "create_public_subnets" {
   type        = list(string)
   description = "A list of public subnets inside the VPC"
-  default     = ["10.0.1.192/28", "10.0.1.208/28", "10.0.1.224/28"]
+  default     = null
 }
 
 variable "get_azs" {
   type        = list(string)
   description = "A list of availability zones names or ids in the region"
-  default     = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
+  default     = null
 }
 
 variable "create_igw" {
   type        = bool
   description = "Controls if an Internet Gateway is created for public subnets and the related routes that connect them"
-  default     = true
+  default     = null
 }
 
 variable "enable_nat_gateway" {
   type        = bool
   description = "Should be true if you want to provision NAT Gateways for each of your private networks"
-  default     = true
+  default     = null
 }
 
 variable "create_nat_gateway_per_az" {
   type        = bool
   description = "Should be true if you want only one NAT Gateway per availability zone. Requires `var.azs` to be set, and the number of `public_subnets` created to be greater than or equal to the number of availability zones specified in `var.azs`"
-  default     = true
+  default     = null
 }
 
 ########################################################################################################################
-### S3 module variables
+### aws_s3 module variables
 ########################################################################################################################
-
 variable "bucket" {
   type        = string
   description = "Specifies the name of an S3 Bucket"
-  default     = "vishaalpal-pathways-node-weather-app-quick-start"
+  default     = null
 }
 
 variable "set_s3_gateway_endpoint" {
   type        = string
   description = "Specifies the service name for the gateway endpoint"
-  default     = "com.amazonaws.eu-west-1.s3"
+  default     = null
+}
+
+########################################################################################################################
+### fargate module variables
+########################################################################################################################
+variable "set_ecr_repo_name" {
+  type        = string
+  description = "Specifies the name of the ECR repository"
+  default     = null
 }
