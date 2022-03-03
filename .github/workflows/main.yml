@@ -1,4 +1,4 @@
-name: Deploy
+name: build_network_infrastructure
 on:
   push:
     branches:

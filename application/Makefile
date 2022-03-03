@@ -4,13 +4,17 @@ export AWS_REGION
 export ECR_REPO_NAME
 
 .PHONY: build_docker_image
-build:
-	docker build -t $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(ECR_REPO_NAME):1 -f $(DOCKERFILE) .
+build_docker_image:
+	docker build -t $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(ECR_REPO_NAME):latest -f $(DOCKERFILE) .
+
+.PHONY tag_docker_image
+tag_docker_image:
+	docker tag $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(ECR_REPO_NAME):latest 
 
 .PHONY: ecr_login
-login:
+ecr_login:
 	aws ecr get-login-password --region $(AWS_REGION) | docker login --username AWS --password-stdin $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
 
 .PHONY: push_docker_image
-push:
-	docker push $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(ECR_REPO_NAME):1 
+push_docker_image:
+	docker push $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(ECR_REPO_NAME):latest 
