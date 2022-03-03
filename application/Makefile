@@ -5,11 +5,11 @@ export ECR_REPO_NAME
 
 .PHONY: build_docker_image
 build_docker_image:
-	docker build -t $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(ECR_REPO_NAME):latest -f $(DOCKERFILE) .
+	docker build -t $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(ECR_REPO_NAME):v1.0 -f $(DOCKERFILE) .
 
 .PHONY tag_docker_image
 tag_docker_image:
-	docker tag $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(ECR_REPO_NAME):latest 
+	docker tag $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(ECR_REPO_NAME):v1.0 
 
 .PHONY: ecr_login
 ecr_login:
@@ -17,4 +17,4 @@ ecr_login:
 
 .PHONY: push_docker_image
 push_docker_image:
-	docker push $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(ECR_REPO_NAME):latest 
+	docker push $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(ECR_REPO_NAME):v1.0 
