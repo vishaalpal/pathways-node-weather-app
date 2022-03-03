@@ -1,7 +1,7 @@
 name: build_weather_app
 on:
   workflow_run:
-    workflows: ["Deploy"]
+    workflows: ["build_network_infrastructure"]
     branches: [master]
     types:
       - completed
