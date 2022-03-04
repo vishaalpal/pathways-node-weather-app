@@ -107,16 +107,3 @@ output "s3_bucket_regional_domain_name" {
   description = "The bucket region-specific domain name"
   value       = module.aws_s3.s3_bucket_regional_domain_name
 }
-
-########################################################################################################################
-### fargate module outputs
-########################################################################################################################
-output "ecr_repo_registry_id" {
-  description = "The registry ID where the repository was created"
-  value       = module.fargate.ecr_repo_registry_id
-}
-
-output "ecr_repo_repository_url" {
-  description = "The URL of the repository (in the form"
-  value       = module.fargate.ecr_repo_repository_url
-}

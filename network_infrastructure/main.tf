@@ -26,10 +26,3 @@ module "aws_s3" {
   public_route_table_ids  = module.aws_vpc.public_route_table_ids
   private_route_table_ids = module.aws_vpc.private_route_table_ids
 }
-
-module "fargate" {
-  source              = "./modules/aws/fargate"
-  set_username_prefix = var.set_username_prefix
-  set_custom_tags     = var.set_custom_tags
-  set_ecr_repo_name   = var.set_ecr_repo_name
-}

@@ -1,9 +1,13 @@
 name: destroy_network_infrastructure
 on:
   workflow_dispatch:
+  workflows:
+    - "build_network_infrastructure"
   push:
     branches:
       - destroy
+    types:
+      - completed
     paths:
       - '.github/workflows/destroy_network_infrastructure.yml'
       - 'infrastructure/modules/**'
