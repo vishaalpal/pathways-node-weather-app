@@ -7,7 +7,7 @@ export ECR_REPO_NAME
 build_docker_image:
 	docker build -t $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(ECR_REPO_NAME):v1.0 -f $(DOCKERFILE) .
 
-.PHONY tag_docker_image
+.PHONY: tag_docker_image
 tag_docker_image:
 	docker tag $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(ECR_REPO_NAME):v1.0 
 
