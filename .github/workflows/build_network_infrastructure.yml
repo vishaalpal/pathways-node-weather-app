@@ -1,6 +1,6 @@
 name: build_network_infrastructure
 on:
-  worklow_dispatch:
+  workflow_dispatch:
   push:
     branches:
       - master
