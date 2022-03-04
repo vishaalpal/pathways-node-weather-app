@@ -1,18 +1,15 @@
-name: destroy_network_infrastructure
+name: build_network_infrastructure
 on:
+  worklow_dispatch:
   push:
     branches:
-      - destroy
+      - master
     paths:
-      - 'orchestration/docker-compose.yml'
-      - 'orchestration/Makefile'
-      - '.github/workflows/**'
-      - 'orchestration/*dockerfile'
-      - 'orchestration/.env'
+      - '.github/workflows/build_network_infrastructure.yml'
       - 'infrastructure/modules/**'
       - 'infrastructure/**.tf'
 jobs:
-  terraform_destroy_plan:
+  terraform_plan:
     defaults:
       run:
         working-directory: ./orchestration
@@ -23,16 +20,16 @@ jobs:
       AWS_SESSION_TOKEN:  ${{ secrets.AWS_SESSION_TOKEN }} 
     steps:
     - uses: actions/checkout@v2
-    - name: Terraform_Destroy_Plan
-      run: make run_destroy_plan       
+    - name: Terraform_Plan
+      run: make run_plan       
 
-  terraform_destroy_apply:
+  terraform_apply:
     defaults:
       run:
         working-directory: ./orchestration
     environment:
       name: approval
-    needs: terraform_destroy_plan
+    needs: terraform_plan
     runs-on: ubuntu-latest
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -40,5 +37,8 @@ jobs:
       AWS_SESSION_TOKEN:  ${{ secrets.AWS_SESSION_TOKEN }} 
     steps:
     - uses: actions/checkout@v2
-    - name: Terraform_Destroy_Apply
-      run: make run_destroy_apply 
+    - name: Terraform_Plan
+      run: make run_plan
+    - name: Terraform_Apply
+      run: make run_apply
+      

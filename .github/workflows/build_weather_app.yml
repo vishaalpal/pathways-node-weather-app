@@ -1,12 +1,13 @@
 name: build_weather_app
 on:
+  workflow_dispatch:
   workflow_run:
     workflows: ["build_network_infrastructure"]
     branches: [master]
     types:
       - completed
     paths:
-      - '.github/workflows/**'
+      - '.github/workflows/build_weather_app.yml'
       - 'application/public/**'
       - 'application/src/**'
       - 'application/templates/**'
