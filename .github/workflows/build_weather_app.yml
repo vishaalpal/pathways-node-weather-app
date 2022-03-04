@@ -29,19 +29,12 @@ jobs:
       - name: Checkout_Repo
         uses: actions/checkout@v2
 
-      - name: Build docker image
+      - name: Build and tag docker image
         env:
           AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
           ECR_REPO_NAME: ${{ secrets.ECR_REPO_NAME }}
-        run: make build_docker_image
-      
-      - name: Tag docker image
-        env: 
-          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          ECR_REPO_NAME: ${{ secrets.ECR_REPO_NAME }}
-        run: make tag_docker_image
+        run: make build_and_tag_docker_image
 
       - name: Log in to Amazon ECR
         run: make ecr_login
