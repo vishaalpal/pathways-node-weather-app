@@ -8,9 +8,9 @@ on:
       - destroy
     types:
       - completed
-  push:
-    branches:
-      - destroy
+  # push:
+  #   branches:
+  #     - destroy
     paths:
       - '.github/workflows/destroy_back_end.yml'
       - 'back_end/modules/**'

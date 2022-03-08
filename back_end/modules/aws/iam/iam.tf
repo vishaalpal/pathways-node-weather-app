@@ -35,8 +35,8 @@ data "aws_iam_policy_document" "render_assume_role_policy" {
 data "aws_iam_policy_document" "render_ecs_log_creation_policy" {
   statement {
     sid       = "ECSCreateCloudWatchLogPermissions"
-    actions   = ["logs: *"]
-    resources = ["arn:aws:logs:*:*:*"]
+    actions   = ["logs:*"]
+    resources = ["*"]
     effect    = "Allow"
   }
 }
