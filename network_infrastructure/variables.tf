@@ -32,9 +32,21 @@ variable "create_private_subnets" {
   default     = null
 }
 
+variable "private_subnet_tags" {
+  type        = map(string)
+  description = "Additional tags for the private subnets"
+  default     = null
+}
+
 variable "create_public_subnets" {
   type        = list(string)
   description = "A list of public subnets inside the VPC"
+  default     = null
+}
+
+variable "public_subnet_tags" {
+  type        = map(string)
+  description = "Additional tags for the public subnets"
   default     = null
 }
 
@@ -72,6 +84,12 @@ variable "bucket" {
 }
 
 variable "set_s3_gateway_endpoint" {
+  type        = string
+  description = "Specifies the service name for the gateway endpoint"
+  default     = null
+}
+
+variable "set_cw_gateway_endpoint" {
   type        = string
   description = "Specifies the service name for the gateway endpoint"
   default     = null

@@ -8,7 +8,7 @@ terraform {
   }
   backend "s3" {
     bucket = "pathways-dojo"
-    key    = "vishaalpal-tfstate-container-infrastructure"
+    key    = "vishaalpal-tfstate-back-end"
     region = "us-east-1"
   }
 }

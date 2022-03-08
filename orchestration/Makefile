@@ -1,12 +1,12 @@
-export COMPOSE_FILE
-export AWS_ACCOUNT_ID
-export AWS_REGION 
+export COMPOSE_FILE 
+export AWS_ACCOUNT_ID 
+export AWS_REGION
 export ECR_REPO_NAME
 COMPOSE_RUN_TERRAFORM = docker-compose -f docker-compose.yml -f $(COMPOSE_FILE) run --rm tf 
 COMPOSE_RUN_BASH = docker-compose -f docker-compose.yml -f $(COMPOSE_FILE) run --rm --entrypoint bash tf
 COMPOSE_RUN_AWS = docker-compose -f docker-compose.yml -f $(COMPOSE_FILE) run --rm --entrypoint aws tf
 dockerfile = weather-app-dockerfile
-img_name = $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(ECR_REPO_NAME)
+img_name = ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO_NAME}
 yellow_txt = \033[33;1;3m
 green_txt = \033[32;1;3m
 colour_suffix = \033[0m
@@ -25,38 +25,38 @@ run_destroy_apply: init destroy_apply
 
 .PHONY: version
 version:
-	$(COMPOSE_RUN_TERRAFORM) --version
+	${COMPOSE_RUN_TERRAFORM} --version
 	
 .PHONY: init
 init:
-	$(COMPOSE_RUN_TERRAFORM) init -input=false
-	-$(COMPOSE_RUN_TERRAFORM) validate
-	-$(COMPOSE_RUN_TERRAFORM) fmt
+	${COMPOSE_RUN_TERRAFORM} init -input=false
+	-${COMPOSE_RUN_TERRAFORM} validate
+	-${COMPOSE_RUN_TERRAFORM} fmt
 
 .PHONY: plan
 plan:
-	$(COMPOSE_RUN_TERRAFORM) plan -out=tfplan -input=false
+	${COMPOSE_RUN_TERRAFORM} plan -out=tfplan -input=false
 
 .PHONY: apply
 apply:
-	$(COMPOSE_RUN_TERRAFORM) apply "tfplan"
+	${COMPOSE_RUN_TERRAFORM} apply "tfplan"
 
 .PHONY: destroy_plan
 destroy_plan:
-	$(COMPOSE_RUN_TERRAFORM) plan -destroy
+	${COMPOSE_RUN_TERRAFORM} plan -destroy
 
 .PHONY: destroy_apply
 destroy_apply:
-	$(COMPOSE_RUN_TERRAFORM) destroy -auto-approve
+	${COMPOSE_RUN_TERRAFORM} destroy -auto-approve
 
 .PHONY: list_bucket
 list_bucket: 
-	$(COMPOSE_RUN_AWS) s3 ls
+	${COMPOSE_RUN_AWS} s3 ls
 
 .PHONY: build_and_tag_docker_image
 build_and_tag_docker_image:
 	@echo "${yellow_txt}Building and tagging docker image...\n${colour_suffix}"
-	docker build -t ${img_name}:latest -f ${dockerfile} .
+	docker build -t ${img_name}:latest -f ../application/${dockerfile} ../application
 	@echo "${green_txt}Successfully created the docker image:\n${img_name}${colour_suffix}"
 
 .PHONY: ecr_login

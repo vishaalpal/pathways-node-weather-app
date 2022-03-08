@@ -7,6 +7,7 @@ variable "set_s3_gateway_endpoint" {}
 variable "vpc_id" {}
 variable "public_route_table_ids" {}
 variable "private_route_table_ids" {}
+variable "set_cw_gateway_endpoint" {}
 
 ########################################################################################################################
 ### Create resources
@@ -19,19 +20,30 @@ resource "aws_s3_bucket" "this" {
 
 data "aws_iam_policy_document" "s3_gateway_policy_content" {
   statement {
-    sid       = "ViewBucketPermissions"
-    actions   = ["s3:ListBucket"]
-    resources = ["${aws_s3_bucket.this.arn}"]
-    effect    = "Allow"
+    sid = "S3BucketAccess"
+    actions = [
+      "s3:ListBucket",
+      "s3:GetObject",
+      "s3:PutObject"
+    ]
+    resources = [
+      "${aws_s3_bucket.this.arn}",
+      "${aws_s3_bucket.this.arn}/*",
+      "arn:aws:s3:::prod-eu-west-1-starport-layer-bucket/*"
+    ]
+    effect = "Allow"
     principals {
       type        = "*"
       identifiers = ["*"]
     }
   }
+}
+
+data "aws_iam_policy_document" "cw_gateway_policy_content" {
   statement {
-    sid       = "ReadWriteBucketPermissions"
-    actions   = ["s3:GetObject", "s3:PutObject"]
-    resources = ["${aws_s3_bucket.this.arn}/*"]
+    sid       = "CloudWatchLogsAccess"
+    actions   = ["logs:*"]
+    resources = ["*"]
     effect    = "Allow"
     principals {
       type        = "*"
@@ -49,6 +61,15 @@ resource "aws_vpc_endpoint" "s3_gateway_endpoint" {
   tags              = var.set_custom_tags
 }
 
+resource "aws_vpc_endpoint" "cwlogs_gateway_endpoint" {
+  service_name      = var.set_cw_gateway_endpoint
+  vpc_id            = var.vpc_id
+  vpc_endpoint_type = "Gateway"
+  policy            = data.aws_iam_policy_document.cw_gateway_policy_content.json
+  auto_accept       = true
+  tags              = var.set_custom_tags
+}
+
 resource "aws_vpc_endpoint_route_table_association" "public_s3_gateway_endpoint_route_table_association" {
   count           = length(var.public_route_table_ids)
   route_table_id  = var.public_route_table_ids[count.index]
@@ -59,6 +80,12 @@ resource "aws_vpc_endpoint_route_table_association" "private_s3_gateway_endpoint
   count           = length(var.private_route_table_ids)
   route_table_id  = var.private_route_table_ids[count.index]
   vpc_endpoint_id = aws_vpc_endpoint.s3_gateway_endpoint.id
+}
+
+resource "aws_vpc_endpoint_route_table_association" "private_cw_gateway_endpoint_route_table_association" {
+  count           = length(var.private_route_table_ids)
+  route_table_id  = var.private_route_table_ids[count.index]
+  vpc_endpoint_id = aws_vpc_endpoint.cwlogs_gateway_endpoint.id
 }
 
 ########################################################################################################################

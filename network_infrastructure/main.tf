@@ -6,7 +6,9 @@ module "aws_vpc" {
   name                   = var.set_username_prefix
   cidr                   = var.set_vpc_cidr_range
   private_subnets        = var.create_private_subnets
+  private_subnet_tags    = var.private_subnet_tags
   public_subnets         = var.create_public_subnets
+  public_subnet_tags     = var.public_subnet_tags
   azs                    = var.get_azs
   create_igw             = var.create_igw
   enable_nat_gateway     = var.enable_nat_gateway
@@ -22,6 +24,7 @@ module "aws_s3" {
   bucket                  = var.bucket
   set_custom_tags         = var.set_custom_tags
   set_s3_gateway_endpoint = var.set_s3_gateway_endpoint
+  set_cw_gateway_endpoint = var.set_cw_gateway_endpoint
   vpc_id                  = module.aws_vpc.vpc_id
   public_route_table_ids  = module.aws_vpc.public_route_table_ids
   private_route_table_ids = module.aws_vpc.private_route_table_ids

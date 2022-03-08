@@ -89,7 +89,7 @@ output "s3_bucket_name" {
 }
 
 output "s3_bucket_name_arn" {
-  description = "The name of the bucket"
+  description = "The arn of the bucket"
   value       = module.aws_s3.s3_bucket_name_arn
 }
 

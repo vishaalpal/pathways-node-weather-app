@@ -3,5 +3,5 @@ services:
   tf:
     volumes:
       - type: bind
-        source: ../container_infrastructure
+        source: ../back_end
         target: /opt/app

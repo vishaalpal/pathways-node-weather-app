@@ -1,0 +1,52 @@
+name: build_front_end
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows:
+    - "build_weather_app"
+  push:
+    branches:
+      - master
+    types:
+      - completed
+    paths:
+      - '.github/workflows/build_network_infrastructure.yml'
+      - 'front_end/modules/**'
+      - 'front_end/**.tf'
+jobs:
+  terraform_plan:
+    defaults:
+      run:
+        working-directory: ./orchestration
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    env:
+      COMPOSE_FILE: "docker-compose.front-end.yml"
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_SESSION_TOKEN:  ${{ secrets.AWS_SESSION_TOKEN }} 
+    steps:
+    - uses: actions/checkout@v2
+    - name: Terraform_Plan
+      run: make run_plan       
+
+  terraform_apply:
+    defaults:
+      run:
+        working-directory: ./orchestration
+    environment:
+      name: approval
+    needs: terraform_plan
+    runs-on: ubuntu-latest
+    env:
+      COMPOSE_FILE: "docker-compose.front-end.yml"
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_SESSION_TOKEN:  ${{ secrets.AWS_SESSION_TOKEN }} 
+    steps:
+    - uses: actions/checkout@v2
+    - name: Terraform_Plan
+      run: make run_plan
+    - name: Terraform_Apply
+      run: make run_apply
+      
