@@ -5,6 +5,7 @@ variable "bucket" {}
 variable "set_custom_tags" {}
 variable "set_s3_gateway_endpoint" {}
 variable "vpc_id" {}
+variable "vpc_cidr_block" {}
 variable "public_route_table_ids" {}
 variable "private_route_table_ids" {}
 variable "set_cw_gateway_endpoint" {}
@@ -52,6 +53,29 @@ data "aws_iam_policy_document" "cw_gateway_policy_content" {
   }
 }
 
+resource "aws_security_group" "cwlogs_gateway_endpoint_sg" {
+  name        = "cwlogs_gateway_endpoint_sg"
+  description = "Allow TLS inbound traffic"
+  vpc_id      = var.vpc_id
+
+  ingress {
+    description = "Allow all traffic from VPC"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = [var.vpc_cidr_block]
+  }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+    Name = "cwlogs_gateway_endpoint_sg"
+  }
+}
+
 resource "aws_vpc_endpoint" "s3_gateway_endpoint" {
   service_name      = var.set_s3_gateway_endpoint
   vpc_id            = var.vpc_id
@@ -62,12 +86,13 @@ resource "aws_vpc_endpoint" "s3_gateway_endpoint" {
 }
 
 resource "aws_vpc_endpoint" "cwlogs_gateway_endpoint" {
-  service_name      = var.set_cw_gateway_endpoint
-  vpc_id            = var.vpc_id
-  vpc_endpoint_type = "Gateway"
-  policy            = data.aws_iam_policy_document.cw_gateway_policy_content.json
-  auto_accept       = true
-  tags              = var.set_custom_tags
+  service_name        = var.set_cw_gateway_endpoint
+  vpc_id              = var.vpc_id
+  vpc_endpoint_type   = "Interface"
+  security_group_ids  = [aws_security_group.cwlogs_gateway_endpoint_sg.id]
+  policy              = data.aws_iam_policy_document.cw_gateway_policy_content.json
+  auto_accept         = true
+  tags                = var.set_custom_tags
 }
 
 resource "aws_vpc_endpoint_route_table_association" "public_s3_gateway_endpoint_route_table_association" {
@@ -80,12 +105,6 @@ resource "aws_vpc_endpoint_route_table_association" "private_s3_gateway_endpoint
   count           = length(var.private_route_table_ids)
   route_table_id  = var.private_route_table_ids[count.index]
   vpc_endpoint_id = aws_vpc_endpoint.s3_gateway_endpoint.id
-}
-
-resource "aws_vpc_endpoint_route_table_association" "private_cw_gateway_endpoint_route_table_association" {
-  count           = length(var.private_route_table_ids)
-  route_table_id  = var.private_route_table_ids[count.index]
-  vpc_endpoint_id = aws_vpc_endpoint.cwlogs_gateway_endpoint.id
 }
 
 ########################################################################################################################
@@ -114,4 +133,14 @@ output "s3_bucket_region" {
 output "s3_bucket_regional_domain_name" {
   description = "The bucket region-specific domain name"
   value       = aws_s3_bucket.this.bucket_regional_domain_name
+}
+
+output "s3_gateway_endpoint_id" {
+  description = "The ID of the VPC endpoint"
+  value       = aws_vpc_endpoint.s3_gateway_endpoint.id
+}
+
+output "cwlogs_gateway_endpoint_id" {
+  description = "The ID of the VPC endpoint"
+  value       = aws_vpc_endpoint.cwlogs_gateway_endpoint.id
 }

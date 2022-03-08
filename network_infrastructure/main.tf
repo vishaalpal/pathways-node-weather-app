@@ -28,4 +28,5 @@ module "aws_s3" {
   vpc_id                  = module.aws_vpc.vpc_id
   public_route_table_ids  = module.aws_vpc.public_route_table_ids
   private_route_table_ids = module.aws_vpc.private_route_table_ids
+  vpc_cidr_block          = module.aws_vpc.vpc_cidr_block
 }
