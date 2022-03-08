@@ -6,7 +6,6 @@ COMPOSE_RUN_TERRAFORM = docker-compose -f docker-compose.yml -f $(COMPOSE_FILE) 
 COMPOSE_RUN_BASH = docker-compose -f docker-compose.yml -f $(COMPOSE_FILE) run --rm --entrypoint bash tf
 COMPOSE_RUN_AWS = docker-compose -f docker-compose.yml -f $(COMPOSE_FILE) run --rm --entrypoint aws tf
 dockerfile = weather-app-dockerfile
-img_name = ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO_NAME}
 yellow_txt = \033[33;1;3m
 green_txt = \033[32;1;3m
 colour_suffix = \033[0m
@@ -56,7 +55,7 @@ list_bucket:
 .PHONY: build_and_tag_docker_image
 build_and_tag_docker_image:
 	@echo "${yellow_txt}Building and tagging docker image...\n${colour_suffix}"
-	docker build -t ${img_name}:latest -f ../application/${dockerfile} ../application
+	docker build -t ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO_NAME}:latest -f ../application/${dockerfile} ../application
 	@echo "${green_txt}Successfully created the docker image:\n${img_name}${colour_suffix}"
 
 .PHONY: ecr_login
