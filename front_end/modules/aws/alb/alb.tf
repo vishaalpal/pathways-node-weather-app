@@ -1,9 +1,9 @@
 ########################################################################################################################
 # Define variables
 ########################################################################################################################
-variable "alb_name" {}
-variable "alb_target_group_name" {}
-variable "alb_listener_name" {}
+variable "set_alb_name" {}
+variable "set_alb_target_group_name" {}
+variable "set_alb_listener_name" {}
 variable "set_username_prefix" {}
 
 ########################################################################################################################
@@ -39,25 +39,25 @@ data "aws_security_group" "alb_sg_id" {
 }
 
 resource "aws_alb_target_group" "alb_tg" {
-  name        = "${var.set_username_prefix}-${var.alb_target_group_name}"
+  name        = "${var.set_username_prefix}-${var.set_alb_target_group_name}"
   port        = 3000
   protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = data.aws_vpc.vpc_id.id
   tags = {
-    Name = "${var.set_username_prefix} - ${var.alb_target_group_name}"
+    Name = "${var.set_username_prefix} - ${var.set_alb_target_group_name}"
   }
 }
 
 resource "aws_alb" "alb" {
-  name                       = "${var.set_username_prefix}-${var.alb_name}"
+  name                       = "${var.set_username_prefix}-${var.set_alb_name}"
   internal                   = false
   load_balancer_type         = "application"
   security_groups            = [data.aws_security_group.alb_sg_id.id]
   enable_deletion_protection = false
   subnets                    = [for s in data.aws_subnet.public_subnets : s.id]
   tags = {
-    Name = "${var.set_username_prefix} - ${var.alb_name}"
+    Name = "${var.set_username_prefix} - ${var.set_alb_name}"
   }
 }
 
@@ -70,7 +70,7 @@ resource "aws_alb_listener" "alb_listener" {
     target_group_arn = aws_alb_target_group.alb_tg.arn
   }
   tags = {
-    Name = "${var.set_username_prefix} - ${var.alb_listener_name}"
+    Name = "${var.set_username_prefix} - ${var.set_alb_listener_name}"
   }
 }
 
