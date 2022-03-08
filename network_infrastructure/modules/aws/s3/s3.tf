@@ -116,7 +116,7 @@ output "s3_bucket_name" {
 }
 
 output "s3_bucket_name_arn" {
-  description = "The name of the bucket"
+  description = "The arn of the bucket"
   value       = aws_s3_bucket.this.arn
 }
 
@@ -126,7 +126,7 @@ output "s3_bucket_acl" {
 }
 
 output "s3_bucket_region" {
-  description = "The AWS region this bucket resides in"
+  description = "The AWS region the bucket resides in"
   value       = aws_s3_bucket.this.region
 }
 
@@ -136,11 +136,11 @@ output "s3_bucket_regional_domain_name" {
 }
 
 output "s3_gateway_endpoint_id" {
-  description = "The ID of the VPC endpoint"
+  description = "The ID of the S3 gateway VPC endpoint"
   value       = aws_vpc_endpoint.s3_gateway_endpoint.id
 }
 
 output "cwlogs_gateway_endpoint_id" {
-  description = "The ID of the VPC endpoint"
+  description = "The ID of the CloudWatch logs VPC endpoint"
   value       = aws_vpc_endpoint.cwlogs_gateway_endpoint.id
 }

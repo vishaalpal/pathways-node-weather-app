@@ -30,8 +30,3 @@ create_nat_gateway_per_az = true
 bucket                  = "vishaalpal-pathways-node-weather-app"
 set_s3_gateway_endpoint = "com.amazonaws.eu-west-1.s3"
 set_cw_gateway_endpoint = "com.amazonaws.eu-west-1.logs"
-
-########################################################################################################################
-### fargate module variable values
-########################################################################################################################
-set_ecr_repo_name = "node-weather-app"
