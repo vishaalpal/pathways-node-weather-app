@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   workflow_run:
     workflows:
-      - "build_container_infrastructure"
+      - "build_back_end"
     branches: [master]
     types:
       - completed
