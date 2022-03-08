@@ -29,19 +29,19 @@ variable "set_ecr_repo_name" {
 ########################################################################################################################
 ### aws_sg module variables
 ########################################################################################################################
-variable "alb_sg_name" {
+variable "set_alb_sg_name" {
   type        = string
   description = "The name of the security group"
   default     = null
 }
 
-variable "alb_sg_description" {
+variable "set_alb_sg_description" {
   type        = string
   description = "The description of the security group"
   default     = null
 }
 
-variable "alb_ingress_rules" {
+variable "set_alb_sg_ingress_rules" {
   type = list(object({
     from     = number
     to       = number
@@ -52,7 +52,7 @@ variable "alb_ingress_rules" {
   default     = null
 }
 
-variable "alb_egress_rules" {
+variable "set_alb_sg_egress_rules" {
   type = list(object({
     from     = number
     to       = number
@@ -63,19 +63,19 @@ variable "alb_egress_rules" {
   default     = null
 }
 
-variable "ecs_sg_name" {
+variable "set_ecs_sg_name" {
   type        = string
   description = "The name of the security group"
   default     = null
 }
 
-variable "ecs_sg_description" {
+variable "set_ecs_sg_description" {
   type        = string
   description = "The description of the security group"
   default     = null
 }
 
-variable "ecs_egress_rules" {
+variable "set_ecs_sg_egress_rules" {
   type = list(object({
     from     = number
     to       = number
