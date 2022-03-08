@@ -8,7 +8,6 @@ on:
       - '.github/workflows/destroy_front_end.yml'
       - 'front_end/modules/**'
       - 'front_end/**.tf'
-      
 jobs:
   terraform_destroy_plan:
     defaults:

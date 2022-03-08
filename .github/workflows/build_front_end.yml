@@ -4,13 +4,15 @@ on:
   workflow_run:
     workflows:
     - "build_weather_app"
-  push:
     branches:
       - master
     types:
       - completed
+  push:
+    branches:
+      - master
     paths:
-      - '.github/workflows/build_network_infrastructure.yml'
+      - '.github/workflows/build_front_end.yml'
       - 'front_end/modules/**'
       - 'front_end/**.tf'
 jobs:

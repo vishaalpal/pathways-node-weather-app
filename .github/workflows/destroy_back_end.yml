@@ -15,7 +15,6 @@ on:
       - '.github/workflows/destroy_back_end.yml'
       - 'back_end/modules/**'
       - 'back_end/**.tf'
-      
 jobs:
   terraform_destroy_plan:
     defaults:
