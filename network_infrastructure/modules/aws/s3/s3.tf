@@ -64,7 +64,7 @@ resource "aws_vpc_endpoint" "s3_gateway_endpoint" {
 resource "aws_vpc_endpoint" "cwlogs_gateway_endpoint" {
   service_name      = var.set_cw_gateway_endpoint
   vpc_id            = var.vpc_id
-  vpc_endpoint_type = "Gateway"
+  vpc_endpoint_type = "Interface"
   policy            = data.aws_iam_policy_document.cw_gateway_policy_content.json
   auto_accept       = true
   tags              = var.set_custom_tags
