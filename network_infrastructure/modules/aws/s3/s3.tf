@@ -89,10 +89,11 @@ resource "aws_vpc_endpoint" "cwlogs_gateway_endpoint" {
   service_name       = var.set_cw_gateway_endpoint
   vpc_id             = var.vpc_id
   vpc_endpoint_type  = "Interface"
-  security_group_ids = aws_security_group.cwlogs_gateway_endpoint_sg.id
+  security_group_ids = [aws_security_group.cwlogs_gateway_endpoint_sg.id]
   policy             = data.aws_iam_policy_document.cw_gateway_policy_content.json
   auto_accept        = true
   tags               = var.set_custom_tags
+  depends_on = [aws_security_group.cw_logs_gateway_endpoint_sg]
 }
 
 resource "aws_vpc_endpoint_route_table_association" "public_s3_gateway_endpoint_route_table_association" {
