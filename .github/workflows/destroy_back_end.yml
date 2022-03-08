@@ -1,24 +1,27 @@
-name: destroy_network_infrastructure
+name: destroy_back_end
 on:
   workflow_dispatch:
-  workflows:
-    - "destroy_back_end"
+  workflow_run:
+    workflows:
+    - "destroy_front_end"
   push:
     branches:
       - destroy
     types:
       - completed
     paths:
-      - '.github/workflows/destroy_network_infrastructure.yml'
-      - 'network_infrastructure/modules/**'
-      - 'network_infrastructure/**.tf'
+      - '.github/workflows/destroy_back_end.yml'
+      - 'back_end/modules/**'
+      - 'back_end/**.tf'
 jobs:
   terraform_destroy_plan:
     defaults:
       run:
         working-directory: ./orchestration
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     env:
+      COMPOSE_FILE: "docker-compose.back-end.yml"
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_SESSION_TOKEN:  ${{ secrets.AWS_SESSION_TOKEN }} 
@@ -36,10 +39,11 @@ jobs:
     needs: terraform_destroy_plan
     runs-on: ubuntu-latest
     env:
+      COMPOSE_FILE: "docker-compose.back-end.yml"
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_SESSION_TOKEN:  ${{ secrets.AWS_SESSION_TOKEN }} 
     steps:
     - uses: actions/checkout@v2
     - name: Terraform_Destroy_Apply
-      run: make run_destroy_apply 
+      run: make run_destroy_apply

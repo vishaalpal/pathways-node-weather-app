@@ -6,8 +6,8 @@ on:
       - master
     paths:
       - '.github/workflows/build_network_infrastructure.yml'
-      - 'infrastructure/modules/**'
-      - 'infrastructure/**.tf'
+      - 'network_infrastructure/modules/**'
+      - 'network_infrastructure/**.tf'
 jobs:
   terraform_plan:
     defaults:
@@ -15,6 +15,7 @@ jobs:
         working-directory: ./orchestration
     runs-on: ubuntu-latest
     env:
+      COMPOSE_FILE: "docker-compose.network-infrastructure.yml"
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_SESSION_TOKEN:  ${{ secrets.AWS_SESSION_TOKEN }} 
@@ -32,6 +33,7 @@ jobs:
     needs: terraform_plan
     runs-on: ubuntu-latest
     env:
+      COMPOSE_FILE: "docker-compose.network-infrastructure.yml"
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_SESSION_TOKEN:  ${{ secrets.AWS_SESSION_TOKEN }} 

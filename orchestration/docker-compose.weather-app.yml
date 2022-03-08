@@ -1,0 +1,7 @@
+version: '3'
+services:
+  tf:
+    volumes:
+      - type: bind
+        source: ../application
+        target: /opt/app
