@@ -1,17 +1,21 @@
 name: destroy_network_infrastructure
 on:
   workflow_dispatch:
-  workflows:
-    - "destroy_back_end"
-  push:
+  workflow_run:
+    workflows:
+      - "destroy_back_end"
     branches:
       - destroy
     types:
       - completed
+  push:
+    branches:
+      - destroy
     paths:
       - '.github/workflows/destroy_network_infrastructure.yml'
       - 'network_infrastructure/modules/**'
       - 'network_infrastructure/**.tf'
+      
 jobs:
   terraform_destroy_plan:
     defaults:
@@ -19,6 +23,7 @@ jobs:
         working-directory: ./orchestration
     runs-on: ubuntu-latest
     env:
+      COMPOSE_FILE: "docker-compose.network-infrastructure.yml"
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_SESSION_TOKEN:  ${{ secrets.AWS_SESSION_TOKEN }} 
@@ -36,6 +41,7 @@ jobs:
     needs: terraform_destroy_plan
     runs-on: ubuntu-latest
     env:
+      COMPOSE_FILE: "docker-compose.network-infrastructure.yml"
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_SESSION_TOKEN:  ${{ secrets.AWS_SESSION_TOKEN }} 

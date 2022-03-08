@@ -4,15 +4,18 @@ on:
   workflow_run:
     workflows:
     - "destroy_front_end"
-  push:
     branches:
       - destroy
     types:
       - completed
+  push:
+    branches:
+      - destroy
     paths:
       - '.github/workflows/destroy_back_end.yml'
       - 'back_end/modules/**'
       - 'back_end/**.tf'
+      
 jobs:
   terraform_destroy_plan:
     defaults:
