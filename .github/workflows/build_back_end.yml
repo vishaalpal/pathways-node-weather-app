@@ -4,11 +4,13 @@ on:
   workflow_run:
     workflows:
     - "build_network_infrastructure"
-  push:
     branches:
       - master
     types:
       - completed
+  push:
+    branches:
+      - master
     paths:
       - '.github/workflows/build_back_end.yml'
       - 'back_end/modules/**'

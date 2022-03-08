@@ -15,7 +15,6 @@ on:
       - '.github/workflows/destroy_network_infrastructure.yml'
       - 'network_infrastructure/modules/**'
       - 'network_infrastructure/**.tf'
-      
 jobs:
   terraform_destroy_plan:
     defaults:
