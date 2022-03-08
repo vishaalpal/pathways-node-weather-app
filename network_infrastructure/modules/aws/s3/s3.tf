@@ -90,7 +90,6 @@ resource "aws_vpc_endpoint" "cwlogs_gateway_endpoint" {
   vpc_id              = var.vpc_id
   vpc_endpoint_type   = "Interface"
   security_group_ids  = [aws_security_group.cwlogs_gateway_endpoint_sg.id]
-  private_dns_enabled = true
   policy              = data.aws_iam_policy_document.cw_gateway_policy_content.json
   auto_accept         = true
   tags                = var.set_custom_tags
