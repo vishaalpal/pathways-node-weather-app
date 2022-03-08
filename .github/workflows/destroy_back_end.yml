@@ -3,10 +3,10 @@ on:
   workflow_dispatch:
   workflow_run:
     workflows:
-    - "build_back_end"
+    - "destroy_front_end"
   push:
     branches:
-      - master
+      - destroy
     types:
       - completed
     paths:

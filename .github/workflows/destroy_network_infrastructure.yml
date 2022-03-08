@@ -2,7 +2,7 @@ name: destroy_network_infrastructure
 on:
   workflow_dispatch:
   workflows:
-    - "build_network_infrastructure"
+    - "destroy_back_end"
   push:
     branches:
       - destroy
@@ -10,8 +10,8 @@ on:
       - completed
     paths:
       - '.github/workflows/destroy_network_infrastructure.yml'
-      - 'infrastructure/modules/**'
-      - 'infrastructure/**.tf'
+      - 'network_infrastructure/modules/**'
+      - 'network_infrastructure/**.tf'
 jobs:
   terraform_destroy_plan:
     defaults:

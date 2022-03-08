@@ -1,12 +1,9 @@
 name: destroy_front_end
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows:
-    - "build_front_end"
   push:
     branches:
-      - master
+      - destroy
     types:
       - completed
     paths:
