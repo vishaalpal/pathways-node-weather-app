@@ -107,3 +107,13 @@ output "s3_bucket_regional_domain_name" {
   description = "The bucket region-specific domain name"
   value       = module.aws_s3.s3_bucket_regional_domain_name
 }
+
+output "s3_gateway_endpoint_id" {
+  description = "The ID of the VPC endpoint"
+  value       = module.aws_s3.s3_gateway_endpoint_id
+}
+
+output "cwlogs_gateway_endpoint_id" {
+  description = "The ID of the VPC endpoint"
+  value       = module.aws_s3.cwlogs_gateway_endpoint_id
+}
