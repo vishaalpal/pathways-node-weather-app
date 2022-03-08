@@ -29,15 +29,15 @@ No resources. -->
 | <a name="input_set_username_prefix"></a> [set\_username\_prefix](#input\_set\_username\_prefix) | Name to be used on all the resources as identifier | `string` | null | yes |
 | <a name="input_set_custom_tags"></a> [set\_custom\_tags](#input\_set\_custom\_tags) | Use tags to identify project resources | <pre>map(string){<br>  Student_Name = string<br>  Project_name = string<br>  Pathway = string<br>}</pre> | null | yes |
 | <a name="input_set_vpc_cidr_range"></a> [set\_vpc\_cidr\_range](#input\_set\_vpc\_cidr\_range) | Specifies the name of an S3 Bucket | `string` | null | yes |
-| <a name="input_create_private_subnets"></a> [create\_private\_subnets](#input\_create\_private\_subnets) | A list of private subnets inside the VPC | `list(string)` | null | yes |
-| <a name="input_private_subnet_tags"></a> [private\_subnet\_tags](#input\_private\_subnet\_tags) | Additional tags for the private subnets | <pre>map(string){<br>  Private = string<br>}</pre> | null | yes |
-| <a name="input_create_public_subnets"></a> [create\_public\_subnets](#input\_create\_public\_subnets) | A list of public subnets inside the VPC | `list(string)` | null | yes |
-| <a name="input_public_subnet_tags"></a> [public\_subnet\_tags](#input\_public\_subnet\_tags) | Additional tags for the public subnets | <pre>map(string){<br>  Public = string<br>}</pre> | null | yes |
-| <a name="input_get_azs"></a> [get\_azs](#input\_get\_azs) | A list of availability zones names or ids in the region | `list(string)` | null | yes |
+| <a name="input_set_private_subnets_cidr"></a> [set\_private\_subnets_cidr](#input\_set\_private\_subnets_cidr) | A list of private subnets inside the VPC | `list(string)` | null | yes |
+| <a name="input_set_private_subnet_tags"></a> [set\_private\_subnet\_tags](#input\_set\_private\_subnet\_tags) | Additional tags for the private subnets | <pre>map(string){<br>  Private = string<br>}</pre> | null | yes |
+| <a name="input_set_public_subnets_cidr"></a> [set\_public\_subnets\_cidr](#input\_set\_public\_subnets\_cidr) | A list of public subnets inside the VPC | `list(string)` | null | yes |
+| <a name="input_set_public_subnet_tags"></a> [set\_public\_subnet\_tags](#input\_set\_public\_subnet\_tags) | Additional tags for the public subnets | <pre>map(string){<br>  Public = string<br>}</pre> | null | yes |
+| <a name="input_set_azs"></a> [set\_azs](#input\_set\_azs) | A list of availability zones names or ids in the region | `list(string)` | null | yes |
 | <a name="input_create_igw"></a> [create\_igw](#input\_create\_igw) | Controls if an Internet Gateway is created for public subnets and the related routes that connect them | `bool` | null | yes |
 | <a name="input_enable_nat_gateway"></a> [enable\_nat\_gateway](#input\_enable\_nat\_gateway) | Should be true if you want to provision NAT Gateways for each of your private networks | `bool` | null | yes |
 | <a name="input_create_nat_gateway_per_az"></a> [create\_nat\_gateway\_per\_az](#input\_create\_nat\_gateway\_per\_az) | Should be true if you want only one NAT Gateway per availability zone. Requires `var.azs` to be set, and the number of `public_subnets` created to be greater than or equal to the number of availability zones specified in `var.azs` | `bool` | null | yes |
-| <a name="input_bucket"></a> [bucket](#input\_bucket) | Specifies the name of an S3 Bucket | `string` | null | yes |
+| <a name="input_set_s3_bucket_name"></a> [set\_s3\_bucket\_name](#input\_set\_s3\_bucket\_name) | Specifies the name of an S3 Bucket | `string` | null | yes |
 | <a name="input_set_s3_gateway_endpoint"></a> [set\_s3\_gateway\_endpoint](#input\_set\_s3\_gateway\_endpoint) | Specifies the service name for the gateway endpoint | `string` | null | yes |
 | <a name="input_set_cw_gateway_endpoint"></a> [set\_cw\_gateway\_endpoint](#input\_set\_cw\_gateway\_endpoint) | Specifies the service name for the gateway endpoint | `string` | null | yes |
 

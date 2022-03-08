@@ -26,31 +26,31 @@ variable "set_vpc_cidr_range" {
   default     = null
 }
 
-variable "create_private_subnets" {
+variable "set_private_subnets_cidr" {
   type        = list(string)
   description = "A list of private subnets inside the VPC"
   default     = null
 }
 
-variable "private_subnet_tags" {
+variable "set_private_subnet_tags" {
   type        = map(string)
   description = "Additional tags for the private subnets"
   default     = null
 }
 
-variable "create_public_subnets" {
+variable "set_public_subnets_cidr" {
   type        = list(string)
   description = "A list of public subnets inside the VPC"
   default     = null
 }
 
-variable "public_subnet_tags" {
+variable "set_public_subnet_tags" {
   type        = map(string)
   description = "Additional tags for the public subnets"
   default     = null
 }
 
-variable "get_azs" {
+variable "set_azs" {
   type        = list(string)
   description = "A list of availability zones names or ids in the region"
   default     = null
@@ -77,7 +77,7 @@ variable "create_nat_gateway_per_az" {
 ########################################################################################################################
 ### aws_s3 module variables
 ########################################################################################################################
-variable "bucket" {
+variable "set_s3_bucket_name" {
   type        = string
   description = "Specifies the name of an S3 Bucket"
   default     = null
