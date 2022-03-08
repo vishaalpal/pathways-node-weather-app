@@ -94,12 +94,3 @@ variable "set_cw_gateway_endpoint" {
   description = "Specifies the service name for the gateway endpoint"
   default     = null
 }
-
-########################################################################################################################
-### fargate module variables
-########################################################################################################################
-variable "set_ecr_repo_name" {
-  type        = string
-  description = "Specifies the name of the ECR repository"
-  default     = null
-}
