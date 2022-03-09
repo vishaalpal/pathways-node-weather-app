@@ -2,26 +2,26 @@
 
 # Pathways Dojo Infra Node Weather App
 
-This repository is used in conjunction with the Contino Infra Engineer to Cloud Engineer Pathway course delivered in Contini-U.
-
-It includes and supports the following functionality:
+This repository is used in conjunction with the Contino Infra Engineer to Cloud Engineer Pathway course delivered in Contini-U. It includes and supports the following functionality:
 * Dockerfile and docker-compose configuration for 3M based deployments
 * Makefile providing basic Terraform deployment functionality
 * GitHub workflows for supporting basic Terraform deploy and destroy functionality
 * Terraform IaC for the test deployment of an s3 bucket
 * Node Weather App - https://github.com/phattp/nodejs-weather-app
 
-The Pathways Dojo Infra Node Weather App has been modified to provide the following functionality:
-* Terraform IaC deployments are grouped by lifecycle requirements. With this approach, the infrastructure is deployed in three stages in the respective order below:
-  * network_infrastructure (Deploys the VPC and network dependencies such as subnets and gateways)
-  * back_end (Deploys the ECR repository and any IAM role or Security Group dependencies)
-  * front_end (Deploys the ALB and ECS Cluster and any ECS task or service dependencies)
+This repository has been modified to provide the following functionality:
+* Terraform IaC deployments are grouped by lifecycle requirements. With this approach, the infrastructure is deployed in three pipelines in the respective order below:
+  * network_infrastructure (Deploys the VPC and network dependencies ; i.e. subnets, gateways)
+  * back_end (Deploys the ECR repository and dependencies ; i.e. IAM roles/policies, security groups)
+  * front_end (Deploys the ALB and ECS Cluster and dependencies ; i.e. ALB target groups, ALB listeners, ECS tasks, ECS services)
 * Benefits of this approach include:
-  * Reduced blast radius - only touch resource that have similar lifecycles
-  * Reduce CI/CD deployment timeframes
-  * Seperating the IaC and CI/CD layers hosted provides the ability for different teams to manage different layers in the stack
+  * Reduced blast radius (Only touches resources that have similar lifecycles ;  i.e. Destroying the front_end of the infrastructure does NOT impact the back_end due to different pipelines)
+  * Reduce CI/CD deployment timeframes (Deploys the infrastructure in smaller chunks, faster at runtime)
+  * Seperating the IaC and CI/CD layers hosted provides the ability for different teams to manage different layers in the stack:
+    * Infrastructure Engineers are able to make changes to the infrastructure without affecting the application pipeline
+    * Developers are able to make changes to the application without affecting the IaC pipeline
 
-The NodeJS weather app is now fully deployed and available [here](vishaalpal-weather-app-alb-1955764646.eu-west-1.elb.amazonaws.com)
+The NodeJS weather app is now fully deployed and available [here](http://vishaalpal-weather-app-alb-1955764646.eu-west-1.elb.amazonaws.com)
 
 <br> 
 
@@ -41,10 +41,10 @@ This GitHub template should be used to create your own repository. Repository wi
 * Create GitHub Secrets in your repository for `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` and `AWS_SESSION_TOKEN` if using temporary credentials.
 * Push local changes to the GitHub repos master branch, which should trigger the Github deploy workflow, and deploy the s3 bucket. Remember to review tf plan and approve apply.
 * Create a pull request to merge master changes to destroy branch. Merge changes to trigger the Github destroy workflow deleting the s3 bucket. Remember to review the tf speculative plan and approve destroy.
-* You can list s3 bucket in the APAC Dev account by running `make list_bucket` locally within the repo clone, to check bucket creation and removal. -->
+* You can list s3 bucket in the APAC Dev account by running `make list_bucket` locally within the repo clone, to check bucket creation and removal.
 
 
-Keep reading for in-depth details.
+Keep reading for in-depth details. -->
 
 <br> 
 
