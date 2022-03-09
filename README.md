@@ -26,12 +26,15 @@ The NodeJS weather app is now fully deployed and available [here](http://vishaal
 <br> 
 
 ## Terraform IaC Deployment Workflow
-![Terraform IaC Deployment Workflow](/images/Infrastructure_workflow.png)
+![Terraform IaC Deployment Workflow](/images/infrastructure_workflow.png)
 
 ## NodeJS Weather-App Deployment Workflow
-![NodeJS Weather-App Deployment Workflow](/images/NodeJS_weather_app_deployment_workflow.png)
+![NodeJS Weather-App Deployment Workflow](/images/nodejs_weather_app_deployment_workflow.png)
 
-<!-- ## Getting Started
+## AWS Architecture
+![AWS Architecture](/images/aws_architecture_diagram.png.png)
+
+## Getting Started
 This GitHub template should be used to create your own repository. Repository will need to be public if you are creating it in your personal GitHub account in order to support approval gates in GitHub actions. Configure the following to get started:
 * Clone your repository locally. It should have a branch named `master`.
 * Create a `destroy` branch in your GitHub repo. This will be used to trigger Terraform Destroy workflow during pull request from `master->destroy`.
@@ -44,7 +47,7 @@ This GitHub template should be used to create your own repository. Repository wi
 * You can list s3 bucket in the APAC Dev account by running `make list_bucket` locally within the repo clone, to check bucket creation and removal.
 
 
-Keep reading for in-depth details. -->
+Keep reading for in-depth details.
 
 <br> 
 
