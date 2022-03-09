@@ -25,14 +25,26 @@ The NodeJS weather app is now fully deployed and available [here](http://vishaal
 
 <br> 
 
-## Terraform IaC Deployment Workflow
-![Terraform IaC Deployment Workflow](/images/infrastructure_workflow.png)
+### terraform IaC deployment workflow
+![terraform IaC deployment workflow](/images/infrastructure_workflow.png)
 
-## NodeJS Weather-App Deployment Workflow
-![NodeJS Weather-App Deployment Workflow](/images/nodejs_weather_app_deployment_workflow.png)
+### nodejs weather-app deployment workflow
+![nodejs weather-app deployment workflow](/images/nodejs_weather_app_deployment_workflow.png)
 
-## AWS Architecture
-![AWS Architecture](/images/aws_architecture_diagram.png)
+### network_infrastructure components
+![network_infrastructure components](/images/network_infrastructure.png)
+
+### back_end components
+![back_end components](/images/back_end.png)
+
+### application components
+![application components](/images/application.png)
+
+### front_end components
+![application](/images/front_end.png)
+
+### High level overview of AWS architecture
+![High level overview of AWS architecture](/images/aws_architecture_diagram.png)
 
 ## Getting Started
 This GitHub template should be used to create your own repository. Repository will need to be public if you are creating it in your personal GitHub account in order to support approval gates in GitHub actions. Configure the following to get started:
