@@ -1,6 +1,6 @@
 
 
-# Pathways Dojo Infra Node Weather App Quick Starter
+# Pathways Dojo Infra Node Weather App
 
 This repository is used in conjunction with the Contino Infra Engineer to Cloud Engineer Pathway course delivered in Contini-U.
 
@@ -11,9 +11,27 @@ It includes and supports the following functionality:
 * Terraform IaC for the test deployment of an s3 bucket
 * Node Weather App - https://github.com/phattp/nodejs-weather-app
 
+The Pathways Dojo Infra Node Weather App has been modified to provide the following functionality:
+* Terraform IaC deployments are grouped by lifecycle requirements. With this approach, the infrastructure is deployed in three stages in the respective order below:
+  * network_infrastructure (Deploys the VPC and network dependencies such as subnets and gateways)
+  * back_end (Deploys the ECR repository and any IAM role or Security Group dependencies)
+  * front_end (Deploys the ALB and ECS Cluster and any ECS task or service dependencies)
+* Benefits of this approach include:
+  * Reduced blast radius - only touch resource that have similar lifecycles
+  * Reduce CI/CD deployment timeframes
+  * Seperating the IaC and CI/CD layers hosted provides the ability for different teams to manage different layers in the stack
+
+The NodeJS weather app is now fully deployed and available [here](vishaalpal-weather-app-alb-1955764646.eu-west-1.elb.amazonaws.com)
+
 <br> 
 
-## Getting Started
+## Terraform IaC Deployment Workflow
+![Terraform IaC Deployment Workflow](/images/infrastructure_workflow.png)
+
+## NodeJS Weather-App Deployment Workflow
+![NodeJS Weather-App Deployment Workflow](/images/NodeJS_weather_app_deployment_workflow.png)
+
+<!-- ## Getting Started
 This GitHub template should be used to create your own repository. Repository will need to be public if you are creating it in your personal GitHub account in order to support approval gates in GitHub actions. Configure the following to get started:
 * Clone your repository locally. It should have a branch named `master`.
 * Create a `destroy` branch in your GitHub repo. This will be used to trigger Terraform Destroy workflow during pull request from `master->destroy`.
@@ -23,7 +41,7 @@ This GitHub template should be used to create your own repository. Repository wi
 * Create GitHub Secrets in your repository for `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` and `AWS_SESSION_TOKEN` if using temporary credentials.
 * Push local changes to the GitHub repos master branch, which should trigger the Github deploy workflow, and deploy the s3 bucket. Remember to review tf plan and approve apply.
 * Create a pull request to merge master changes to destroy branch. Merge changes to trigger the Github destroy workflow deleting the s3 bucket. Remember to review the tf speculative plan and approve destroy.
-* You can list s3 bucket in the APAC Dev account by running `make list_bucket` locally within the repo clone, to check bucket creation and removal.
+* You can list s3 bucket in the APAC Dev account by running `make list_bucket` locally within the repo clone, to check bucket creation and removal. -->
 
 
 Keep reading for in-depth details.
