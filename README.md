@@ -26,7 +26,7 @@ The NodeJS weather app is now fully deployed and available [here](vishaalpal-wea
 <br> 
 
 ## Terraform IaC Deployment Workflow
-![Terraform IaC Deployment Workflow](/images/infrastructure_workflow.png)
+![Terraform IaC Deployment Workflow](/images/Infrastructure_workflow.png)
 
 ## NodeJS Weather-App Deployment Workflow
 ![NodeJS Weather-App Deployment Workflow](/images/NodeJS_weather_app_deployment_workflow.png)
