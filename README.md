@@ -32,7 +32,7 @@ The NodeJS weather app is now fully deployed and available [here](http://vishaal
 ![NodeJS Weather-App Deployment Workflow](/images/nodejs_weather_app_deployment_workflow.png)
 
 ## AWS Architecture
-![AWS Architecture](/images/aws_architecture_diagram.png.png)
+![AWS Architecture](/images/aws_architecture_diagram.png)
 
 ## Getting Started
 This GitHub template should be used to create your own repository. Repository will need to be public if you are creating it in your personal GitHub account in order to support approval gates in GitHub actions. Configure the following to get started:
