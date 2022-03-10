@@ -101,7 +101,7 @@ resource "aws_ecs_service" "ecs_service" {
   task_definition = aws_ecs_task_definition.ecs_task.arn
   name            = "${var.set_username_prefix}-weather-app-service"
   cluster         = aws_ecs_cluster.ecs_cluster.id
-  desired_count   = 1
+  desired_count   = 2
 
   load_balancer {
     target_group_arn = var.get_alb_tg_arn
