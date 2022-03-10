@@ -1,17 +1,50 @@
 
 
-# Pathways Dojo Infra Node Weather App Quick Starter
+# Pathways Dojo Infra Node Weather App
 
-This repository is used in conjunction with the Contino Infra Engineer to Cloud Engineer Pathway course delivered in Contini-U.
-
-It includes and supports the following functionality:
+This repository is used in conjunction with the Contino Infra Engineer to Cloud Engineer Pathway course delivered in Contini-U. It includes and supports the following functionality:
 * Dockerfile and docker-compose configuration for 3M based deployments
 * Makefile providing basic Terraform deployment functionality
 * GitHub workflows for supporting basic Terraform deploy and destroy functionality
 * Terraform IaC for the test deployment of an s3 bucket
 * Node Weather App - https://github.com/phattp/nodejs-weather-app
 
+This repository has been modified to provide the following functionality:
+* Terraform IaC deployments are grouped by lifecycle requirements. With this approach, the infrastructure is deployed in three pipelines in the respective order below:
+  * network_infrastructure (Deploys the VPC and network dependencies ; i.e. subnets, gateways)
+  * back_end (Deploys the ECR repository and dependencies ; i.e. IAM roles/policies, security groups)
+  * front_end (Deploys the ALB and ECS Cluster and dependencies ; i.e. ALB target groups, ALB listeners, ECS tasks, ECS services)
+* Benefits of this approach include:
+  * Reduced blast radius (Only touches resources that have similar lifecycles ;  i.e. Destroying the front_end of the infrastructure does NOT impact the back_end due to different pipelines)
+  * Reduce CI/CD deployment timeframes (Deploys the infrastructure in smaller chunks, faster at runtime)
+  * Seperating the IaC and CI/CD layers hosted provides the ability for different teams to manage different layers in the stack:
+    * Infrastructure Engineers are able to make changes to the infrastructure without affecting the application pipeline
+    * Developers are able to make changes to the application without affecting the IaC pipeline
+
+The NodeJS weather app is now fully deployed and available [here](http://vishaalpal-weather-app-alb-1955764646.eu-west-1.elb.amazonaws.com)
+
 <br> 
+
+### terraform IaC deployment workflow
+![terraform IaC deployment workflow](/images/infrastructure_workflow.png)
+
+### nodejs weather-app deployment workflow
+![nodejs weather-app deployment workflow](/images/nodejs_weather_app_deployment_workflow.png)
+
+### network_infrastructure components
+![network_infrastructure components](/images/network_infrastructure.png)
+
+### back_end components
+![back_end components](/images/back_end.png)
+
+### application components
+![application components](/images/application.png)
+
+### front_end components
+![application](/images/front_end.png)
+
+### High level overview of AWS architecture
+![High level overview of AWS architecture](/images/aws_architecture_diagram.png)
 
 ## Getting Started
 This GitHub template should be used to create your own repository. Repository will need to be public if you are creating it in your personal GitHub account in order to support approval gates in GitHub actions. Configure the following to get started:

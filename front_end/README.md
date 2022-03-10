@@ -28,17 +28,17 @@ No resources. -->
 |------|-------------|------|---------|:--------:|
 | <a name="input_set_username_prefix"></a> [set\_username\_prefix](#input\_set\_username\_prefix) | Name to be used on all the resources as identifier | `string` | null | yes |
 | <a name="input_set_custom_tags"></a> [set\_custom\_tags](#input\_set\_custom\_tags) | Use tags to identify project resources | <pre>map(string){<br>  Student_Name = string<br>  Project_name = string<br>  Pathway = string<br>}</pre> | null | yes |
-| <a name="input_alb_name"></a> [alb\_name](#input\_alb\_name) | The name of the load balancer | `string` | null | yes |
-| <a name="input_alb_target_group_name"></a> [alb\_target\_group\_name](#input\_alb\_target\_group\_name) | The name of the target group | `string` | null | yes |
-| <a name="input_alb_listener_name"></a> [alb\_listener\_name](#input\_alb\_listener\_name) | The name of the listener | `string` | null | yes |
-| <a name="input_ecs_cluster_name"></a> [ecs\_cluster\_name](#input\_ecs\_cluster\_name) | The name of the ecs cluster | `string` | null | yes |
-| <a name="input_ecs_task_name"></a> [ecs\_task\_name](#input\_ecs\_task\_name) | The name of the ecs task | `string` | null | yes |
-| <a name="input_ecs_task_cpu"></a> [ecs\_task\_cpu](#input\_ecs\_task\_cpu) | Specified cpu allocation for an ecs task | `number` | null | yes |
-| <a name="input_ecs_task_mem"></a> [ecs\_task\_mem](#input\_ecs\_task\_mem) | Specified memory allocation for an ecs task | `number` | null | yes |
-| <a name="input_ecs_task_container_port"></a> [ecs\_task\_container\_port](#input\_ecs\_task\_container\_port) | Specified exposed port on the container for an ecs task | `number` | null | yes |
-| <a name="input_ecr_image_tag"></a> [ecr\_image\_tag](#input\_ecr\_image\_tag) | Specified tag used for the ecr image | `string` | null | yes |
-| <a name="input_ecs_log_group_name"></a> [ecs\_log\_group\_name](#input\_ecs\_log\_group\_name) | Specified cloudwatch log group name for the ECS service | `string` | null | yes |
-| <a name="input_ecs_log_group_region"></a> [ecs\_log\_group\_region](#input\_ecs\_log\_group\_region) | Specified region for the cloudwatch log group for the ECS service | `string` | null | yes |
+| <a name="input_set_alb_name"></a> [set\_alb\_name](#input\_set\_alb\_name) | The name of the load balancer | `string` | null | yes |
+| <a name="input_set_alb_target_group_name"></a> [set\_alb\_target\_group\_name](#input\_set\_alb\_target\_group\_name) | The name of the target group | `string` | null | yes |
+| <a name="input_set_alb_listener_name"></a> [set\_alb\_listener\_name](#input\_set\_alb\_listener\_name) | The name of the listener | `string` | null | yes |
+| <a name="input_set_ecs_cluster_name"></a> [set\_ecs\_cluster\_name](#input\_set\_ecs\_cluster\_name) | The name of the ecs cluster | `string` | null | yes |
+| <a name="input_set_ecs_task_name"></a> [set\_ecs\_task\_name](#input\_set\_ecs\_task\_name) | The name of the ecs task | `string` | null | yes |
+| <a name="input_set_ecs_task_cpu"></a> [set\_ecs\_task\_cpu](#input\_set\_ecs\_task\_cpu) | Specified cpu allocation for an ecs task | `number` | null | yes |
+| <a name="input_set_ecs_task_mem"></a> [set\_ecs\_task\_mem](#input\_set\_ecs\_task\_mem) | Specified memory allocation for an ecs task | `number` | null | yes |
+| <a name="input_set_ecs_task_container_port"></a> [set\_ecs\_task\_container\_port](#input\_set\_ecs\_task\_container\_port) | Specified exposed port on the container for an ecs task | `number` | null | yes |
+| <a name="input_set_ecr_image_tag"></a> [set\_ecr\_image\_tag](#input\_set\_ecr\_image\_tag) | Specified tag used for the ecr image | `string` | null | yes |
+| <a name="input_set_ecs_log_group_name"></a> [set\_ecs\_log\_group\_name](#input\_set\_ecs\_log\_group\_name) | Specified cloudwatch log group name for the ECS service | `string` | null | yes |
+| <a name="input_set_ecs_log_group_region"></a> [set\_ecs\_log\_group\_region](#input\_set\_ecs\_log\_group\_region) | Specified region for the cloudwatch log group for the ECS service | `string` | null | yes |
 
 ## Outputs
 

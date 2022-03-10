@@ -20,23 +20,23 @@ set_ecr_repo_name = "node-weather-app"
 ########################################################################################################################
 ### aws_sg module variable values
 ########################################################################################################################
-alb_sg_name        = "weather-app-alb-sg"
-alb_sg_description = "Allow incoming HTTP traffic from ALL"
-alb_ingress_rules = [{
+set_alb_sg_name        = "weather-app-alb-sg"
+set_alb_sg_description = "Allow incoming HTTP traffic from ALL"
+set_alb_sg_ingress_rules = [{
   from     = 80
   to       = 80
   protocol = "tcp"
   cidr     = ["0.0.0.0/0"]
 }]
-alb_egress_rules = [{
+set_alb_sg_egress_rules = [{
   from     = 0
   to       = 0
   protocol = "-1"
   cidr     = ["0.0.0.0/0"]
 }]
-ecs_sg_name        = "weather-app-ecs-sg"
-ecs_sg_description = "Allow incoming HTTP traffic from the ALB"
-ecs_egress_rules = [{
+set_ecs_sg_name        = "weather-app-ecs-sg"
+set_ecs_sg_description = "Allow incoming HTTP traffic from the ALB"
+set_ecs_sg_egress_rules = [{
   from     = 0
   to       = 0
   protocol = "-1"

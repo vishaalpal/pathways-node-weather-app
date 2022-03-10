@@ -30,14 +30,14 @@ No resources. -->
 | <a name="input_set_username_prefix"></a> [set\_username\_prefix](#input\_set\_username\_prefix) | Name to be used on all the resources as identifier | `string` | null | yes |
 | <a name="input_set_custom_tags"></a> [set\_custom\_tags](#input\_set\_custom\_tags) | Use tags to identify project resources | <pre>map(string){<br>  Student_Name = string<br>  Project_name = string<br>  Pathway = string<br>}</pre> | null | yes |
 | <a name="input_set_ecr_repo_name"></a> [set\_ecr\_repo\_name](#input\_set\_ecr\_repo\_name) | Specifies the name of the ECR repository | `string` | null | yes |
-| <a name="input_alb_sg_name"></a> [alb\_sg\_name](#input\_alb\_sg\_name) | The name of the security group | `string` | null | yes |
-| <a name="input_alb_sg_description"></a> [alb\_sg\_description](#input\_alb\_sg\_description) | The description of the security group | `string` | null | yes |
-| <a name="input_alb_ingress_rules"></a> [alb\_ingress\_rules](#input\_alb\_ingress\_rules) | Specifies ingress rules for a security group | <pre>list(object({<br>  from = number<br>  to = number<br>  protocol = string<br>  cidr = list(string)<br>})) | null | 
-| <a name="input_alb_egress_rules"></a> [alb\_egress\_rules](#input\_alb\_egress\_rules) | Specifies egress rules for a security group | <pre>list(object({<br>  from = number<br>  to = number<br>  protocol = string<br>  cidr = list(string)<br>})) | null | yes |
-| <a name="input_ecs_sg_name"></a> [ecs\_sg\_name](#input\_ecs\_sg\_name) | The name of the security group | `string` | null | yes |
-| <a name="input_ecs_sg_description"></a> [ecs\_sg\_description](#input\_ecs\_sg\_description) | The description of the security group | `string` | null | yes |
-| <a name="input_ecs_sg_name"></a> [ecs\_sg\_name](#input\_ecs\_sg\_name) | The name of the security group | `string` | null | yes |
-| <a name="input_ecs_egress_rules"></a> [ecs\_egress\_rules](#input\_ecs\_egress\_rules) | Specifies egress rules for a security group | <pre>list(object({<br>  from = number<br>  to = number<br>  protocol = string<br>  cidr = list(string)<br>})) | null | yes |
+| <a name="input_set_alb_sg_name"></a> [set\_alb\_sg\_name](#input\_set\_alb\_sg\_name) | The name of the security group | `string` | null | yes |
+| <a name="input_set_alb_sg_description"></a> [set\_alb\_sg\_description](#input\_set\_alb\_sg\_description) | The description of the security group | `string` | null | yes |
+| <a name="input_set_alb_sg_ingress_rules"></a> [set\_alb\_sg\_ingress\_rules](#input\set\_alb\_sg\_ingress\_rules) | Specifies ingress rules for a security group | <pre>list(object({<br>  from = number<br>  to = number<br>  protocol = string<br>  cidr = list(string)<br>})) | null | 
+| <a name="input_set_alb_sg_egress_rules"></a> [set\_alb\_sg\_egress\_rules](#input\_set\_alb\_sg\_egress\_rules) | Specifies egress rules for a security group | <pre>list(object({<br>  from = number<br>  to = number<br>  protocol = string<br>  cidr = list(string)<br>})) | null | yes |
+| <a name="input_set_ecs_sg_name"></a> [set\_ecs\_sg\_name](#input\_set\_ecs\_sg\_name) | The name of the security group | `string` | null | yes |
+| <a name="input_set_ecs_sg_description"></a> [set\_ecs\_sg\_description](#input\_set\_ecs\_sg\_description) | The description of the security group | `string` | null | yes |
+| <a name="input_set_ecs_sg_name"></a> [set\_ecs\_sg\_name](#input\_set\_ecs\_sg\_name) | The name of the security group | `string` | null | yes |
+| <a name="input_set_ecs_sg_egress_rules"></a> [set\_ecs\_sg\_egress\_rules](#input\_set\_ecs\_sg\_egress\_rules) | Specifies egress rules for a security group | <pre>list(object({<br>  from = number<br>  to = number<br>  protocol = string<br>  cidr = list(string)<br>})) | null | yes |
 
 ## Outputs
 

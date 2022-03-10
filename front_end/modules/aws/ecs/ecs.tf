@@ -2,16 +2,16 @@
 # Define variables
 ########################################################################################################################
 variable "set_username_prefix" {}
-variable "ecs_cluster_name" {}
-variable "ecs_task_name" {}
-variable "ecs_task_cpu" {}
-variable "ecs_task_mem" {}
-variable "ecs_task_container_port" {}
-variable "ecr_image_tag" {}
-variable "alb_arn" {}
-variable "alb_tg_arn" {}
-variable "ecs_log_group_name" {}
-variable "ecs_log_group_region" {}
+variable "set_ecs_cluster_name" {}
+variable "set_ecs_task_name" {}
+variable "set_ecs_task_cpu" {}
+variable "set_ecs_task_mem" {}
+variable "set_ecs_task_container_port" {}
+variable "set_ecr_image_tag" {}
+variable "set_ecs_log_group_name" {}
+variable "set_ecs_log_group_region" {}
+variable "get_alb_arn" {}
+variable "get_alb_tg_arn" {}
 
 ########################################################################################################################
 ### Create resources
@@ -54,41 +54,41 @@ data "aws_ecr_repository" "ecr_repo_name" {
 }
 
 resource "aws_ecs_cluster" "ecs_cluster" {
-  name = "${var.set_username_prefix}-${var.ecs_cluster_name}"
+  name = "${var.set_username_prefix}-${var.set_ecs_cluster_name}"
   setting {
     name  = "containerInsights"
     value = "enabled"
   }
   tags = {
-    Name = "${var.set_username_prefix} - ${var.ecs_cluster_name}"
+    Name = "${var.set_username_prefix} - ${var.set_ecs_cluster_name}"
   }
 }
 
 resource "aws_ecs_task_definition" "ecs_task" {
-  family             = "${var.set_username_prefix}-${var.ecs_task_name}"
+  family             = "${var.set_username_prefix}-${var.set_ecs_task_name}"
   network_mode       = "awsvpc"
   execution_role_arn = data.aws_iam_role.iam_role_name.arn
-  cpu                = var.ecs_task_cpu
-  memory             = var.ecs_task_mem
+  cpu                = var.set_ecs_task_cpu
+  memory             = var.set_ecs_task_mem
   container_definitions = jsonencode([
     {
       "portMappings" : [
         {
           "protocol" : "tcp",
-          "containerPort" : "${var.ecs_task_container_port}"
+          "containerPort" : "${var.set_ecs_task_container_port}"
         }
       ],
       "logConfiguration" : {
         "logDriver" : "awslogs",
         "options" : {
           "awslogs-create-group" : "true",
-          "awslogs-group" : "${var.ecs_log_group_name}",
-          "awslogs-region" : "${var.ecs_log_group_region}",
+          "awslogs-group" : "${var.set_ecs_log_group_name}",
+          "awslogs-region" : "${var.set_ecs_log_group_region}",
           "awslogs-stream-prefix" : "ecs/weather-app-service/ecs-task-id"
         }
       },
       "name" : "weather-app",
-      "image" : "${data.aws_ecr_repository.ecr_repo_name.repository_url}:${var.ecr_image_tag}",
+      "image" : "${data.aws_ecr_repository.ecr_repo_name.repository_url}:${var.set_ecr_image_tag}",
       "requiresCompatibilities" : [
         "FARGATE"
       ]
@@ -101,12 +101,12 @@ resource "aws_ecs_service" "ecs_service" {
   task_definition = aws_ecs_task_definition.ecs_task.arn
   name            = "${var.set_username_prefix}-weather-app-service"
   cluster         = aws_ecs_cluster.ecs_cluster.id
-  desired_count   = 1
+  desired_count   = 2
 
   load_balancer {
-    target_group_arn = var.alb_tg_arn
+    target_group_arn = var.get_alb_tg_arn
     container_name   = "weather-app"
-    container_port   = var.ecs_task_container_port
+    container_port   = var.set_ecs_task_container_port
   }
 
   network_configuration {
@@ -114,7 +114,7 @@ resource "aws_ecs_service" "ecs_service" {
     subnets          = [for s in data.aws_subnet.private_subnets : s.id]
     assign_public_ip = false
   }
-  depends_on = [var.alb_arn, var.alb_tg_arn]
+  depends_on = [var.get_alb_arn, var.get_alb_tg_arn]
 }
 
 ########################################################################################################################
