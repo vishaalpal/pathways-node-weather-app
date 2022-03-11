@@ -17,6 +17,7 @@
 |------|--------|---------|
 | <a name="module_s3"></a> [s3](#module\_s3) | ./modules/aws/s3 | n/a |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | n/a |
+| <a name="module_vpc_endpoints"></a> [vpc_endpoints](#module\_vpc\_endpoints) | ./modules/aws/vpc_endpoints | n/a |
 
 <!-- ## Resources
 
@@ -38,6 +39,7 @@ No resources. -->
 | <a name="input_enable_nat_gateway"></a> [enable\_nat\_gateway](#input\_enable\_nat\_gateway) | Should be true if you want to provision NAT Gateways for each of your private networks | `bool` | null | yes |
 | <a name="input_create_nat_gateway_per_az"></a> [create\_nat\_gateway\_per\_az](#input\_create\_nat\_gateway\_per\_az) | Should be true if you want only one NAT Gateway per availability zone. Requires `var.azs` to be set, and the number of `public_subnets` created to be greater than or equal to the number of availability zones specified in `var.azs` | `bool` | null | yes |
 | <a name="input_set_s3_bucket_name"></a> [set\_s3\_bucket\_name](#input\_set\_s3\_bucket\_name) | Specifies the name of an S3 Bucket | `string` | null | yes |
+| <a name="input_set_ecr_bucket_arn"></a> [set\_ecr\_bucket_arn](#input\_set\_ecr\_bucket_arn) | Specifies the bucket ARN for the ECR service | `list(string)` | null | yes |
 | <a name="input_set_s3_gateway_endpoint"></a> [set\_s3\_gateway\_endpoint](#input\_set\_s3\_gateway\_endpoint) | Specifies the service name for the gateway endpoint | `string` | null | yes |
 | <a name="input_set_cw_gateway_endpoint"></a> [set\_cw\_gateway\_endpoint](#input\_set\_cw\_gateway\_endpoint) | Specifies the service name for the gateway endpoint | `string` | null | yes |
 
