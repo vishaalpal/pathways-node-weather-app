@@ -45,11 +45,11 @@ set_cw_endpoint_sg_ingress_rules = [{
   from     = 443
   to       = 443
   protocol = "tcp"
-  cidr     = ["0.0.0.0/0"]
+  # cidr     = ["0.0.0.0/0"]
 }]
 set_cw_endpoint_sg_egress_rules = [{
   from     = 0
   to       = 0
   protocol = "-1"
-  cidr     = ["0.0.0.0/0"]
+  # cidr     = ["0.0.0.0/0"]
 }]

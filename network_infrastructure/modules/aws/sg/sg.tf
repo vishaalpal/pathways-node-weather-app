@@ -6,6 +6,7 @@ variable "set_username_prefix" {}
 variable "set_cw_endpoint_sg_name" {}
 variable "set_cw_endpoint_sg_description" {}
 variable "get_vpc_id" {}
+variable "get_vpc_cidr_block" {}
 variable "set_cw_endpoint_sg_ingress_rules" {}
 variable "set_cw_endpoint_sg_egress_rules" {}
 
@@ -23,7 +24,7 @@ resource "aws_security_group" "cw_endpoint_sg" {
       from_port   = ingress.value.from
       to_port     = ingress.value.to
       protocol    = ingress.value.protocol
-      cidr_blocks = ingress.value.cidr
+      cidr_blocks = var.get_vpc_cidr_block
     }
   }
 
@@ -33,7 +34,7 @@ resource "aws_security_group" "cw_endpoint_sg" {
       from_port   = egress.value.from
       to_port     = egress.value.to
       protocol    = egress.value.protocol
-      cidr_blocks = egress.value.cidr
+      cidr_blocks = var.get_vpc_cidr_block
     }
   }
   tags = {

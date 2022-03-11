@@ -36,6 +36,7 @@ module "aws_sg" {
   set_cw_endpoint_sg_ingress_rules = var.set_cw_endpoint_sg_ingress_rules
   set_cw_endpoint_sg_egress_rules  = var.set_cw_endpoint_sg_egress_rules
   get_vpc_id                       = module.aws_vpc.vpc_id
+  get_vpc_cidr_block               = var.vpc_cidr_block
 }
 
 ########################################################################################################################
