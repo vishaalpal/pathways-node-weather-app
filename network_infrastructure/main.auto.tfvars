@@ -39,8 +39,8 @@ set_cw_gateway_endpoint = "com.amazonaws.eu-west-1.logs"
 ########################################################################################################################
 ### aws_sg module variable values
 ########################################################################################################################
-set_alb_sg_name        = "cwlogs_gateway_endpoint_sg"
-set_alb_sg_description = "Allow incoming HTTPS traffic from VPC"
+set_cwgateway_sg_name        = "cwlogs_gateway_endpoint_sg"
+set_cwgateway_sg_description = "Allow incoming HTTPS traffic from VPC"
 set_cwgateway_sg_ingress_rules = [{
   from     = 443
   to       = 443
