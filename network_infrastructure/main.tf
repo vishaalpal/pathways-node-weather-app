@@ -28,7 +28,7 @@ module "aws_s3" {
 ########################################################################################################################
 ### Reference the aws_vpc_endpoints module
 ########################################################################################################################
-module "vpc_endpoints" {
+module "aws_vpc_endpoints" {
   source                      = "./modules/aws/vpc_endpoints"
   set_custom_tags             = var.set_custom_tags
   set_ecr_bucket_arn          = var.set_ecr_bucket_arn
