@@ -6,7 +6,6 @@ variable "set_username_prefix" {}
 variable "set_cw_endpoint_sg_name" {}
 variable "set_cw_endpoint_sg_description" {}
 variable "get_vpc_id" {}
-variable "get_vpc_cidr_block" {}
 variable "set_cw_endpoint_sg_ingress_rules" {}
 variable "set_cw_endpoint_sg_egress_rules" {}
 
