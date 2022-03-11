@@ -52,7 +52,6 @@ module "aws_vpc_endpoints" {
   get_vpc_id                  = module.aws_vpc.vpc_id
   get_vpc_cidr_block          = module.aws_vpc.vpc_cidr_block
   get_private_subnet_ids      = module.aws_vpc.private_subnets
-  get_public_subnet_ids       = module.aws_vpc.public_subnets
   get_public_route_table_ids  = module.aws_vpc.public_route_table_ids
   get_private_route_table_ids = module.aws_vpc.private_route_table_ids
 }
