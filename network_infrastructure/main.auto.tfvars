@@ -27,6 +27,11 @@ create_nat_gateway_per_az = true
 ########################################################################################################################
 ### aws_s3 module variable values
 ########################################################################################################################
-set_s3_bucket_name      = "vishaalpal-pathways-node-weather-app"
+set_s3_bucket_name = "vishaalpal-pathways-node-weather-app"
+
+########################################################################################################################
+### aws_vpc_endpoints module variable values
+########################################################################################################################
+set_ecr_bucket_arn      = "arn:aws:s3:::prod-eu-west-1-starport-layer-bucket"
 set_s3_gateway_endpoint = "com.amazonaws.eu-west-1.s3"
 set_cw_gateway_endpoint = "com.amazonaws.eu-west-1.logs"

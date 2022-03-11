@@ -20,13 +20,23 @@ module "aws_vpc" {
 ### Reference the aws_s3 module
 ########################################################################################################################
 module "aws_s3" {
-  source                      = "./modules/aws/s3"
+  source             = "./modules/aws/s3"
+  set_custom_tags    = var.set_custom_tags
+  set_s3_bucket_name = var.set_s3_bucket_name
+}
+
+########################################################################################################################
+### Reference the aws_vpc_endpoints module
+########################################################################################################################
+module "vpc_endpoints" {
+  source                      = "./modules/aws/vpc_endpoints"
   set_custom_tags             = var.set_custom_tags
-  set_s3_bucket_name          = var.set_s3_bucket_name
+  set_ecr_bucket_arn          = var.set_ecr_bucket_arn
   set_s3_gateway_endpoint     = var.set_s3_gateway_endpoint
   set_cw_gateway_endpoint     = var.set_cw_gateway_endpoint
+  get_s3_bucket_arn           = module.aws_s3.s3_bucket_name_arn
   get_vpc_id                  = module.aws_vpc.vpc_id
+  get_vpc_cidr_block          = module.aws_vpc.vpc_cidr_block
   get_public_route_table_ids  = module.aws_vpc.public_route_table_ids
   get_private_route_table_ids = module.aws_vpc.private_route_table_ids
-  get_vpc_cidr_block          = module.aws_vpc.vpc_cidr_block
 }

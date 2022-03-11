@@ -83,6 +83,9 @@ variable "set_s3_bucket_name" {
   default     = null
 }
 
+########################################################################################################################
+### aws_vpc_endpoints module variables
+########################################################################################################################
 variable "set_s3_gateway_endpoint" {
   type        = string
   description = "Specifies the service name for the gateway endpoint"
@@ -93,4 +96,10 @@ variable "set_cw_gateway_endpoint" {
   type        = string
   description = "Specifies the service name for the gateway endpoint"
   default     = null
+}
+
+variable "set_ecr_bucket_arn" {
+  type = string
+  description = "Specifies the bucket ARN for the ECR service"
+  default = null
 }

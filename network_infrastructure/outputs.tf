@@ -108,6 +108,9 @@ output "s3_bucket_regional_domain_name" {
   value       = module.aws_s3.s3_bucket_regional_domain_name
 }
 
+########################################################################################################################
+### aws_vpc_endpoints module outputs
+########################################################################################################################
 output "s3_gateway_endpoint_id" {
   description = "The ID of the VPC endpoint"
   value       = module.aws_s3.s3_gateway_endpoint_id
