@@ -46,7 +46,7 @@ module "aws_vpc_endpoints" {
   set_custom_tags             = var.set_custom_tags
   set_ecr_bucket_arn          = var.set_ecr_bucket_arn
   set_s3_gateway_endpoint     = var.set_s3_gateway_endpoint
-  set_cw_gateway_endpoint     = var.set_cw_gateway_endpoint
+  set_cw_interface_endpoint   = var.set_cw_interface_endpoint
   get_s3_bucket_arn           = module.aws_s3.s3_bucket_name_arn
   get_cw_endpoint_sg_id       = module.aws_sg.cw_endpoint_sg_id
   get_vpc_id                  = module.aws_vpc.vpc_id
