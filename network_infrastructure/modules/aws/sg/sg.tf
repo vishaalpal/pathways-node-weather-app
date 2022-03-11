@@ -46,5 +46,5 @@ resource "aws_security_group" "cwlogs_gateway_endpoint_sg" {
 ########################################################################################################################
 output "cwlogs_gateway_endpoint_sg_id" {
   description = "The ID of the security group"
-  value       = aws_security_group.alb_sg.id
+  value       = aws_security_group.cwlogs_gateway_endpoint_sg.id
 }
