@@ -29,13 +29,13 @@ module "aws_s3" {
 ### Reference the aws_sg module
 ########################################################################################################################
 module "aws_sg" {
-  source                         = "./modules/aws/sg"
-  set_username_prefix            = var.set_username_prefix
-  set_cwgateway_sg_name          = var.set_cwgateway_sg_name
-  set_cwgateway_sg_description   = var.set_cwgateway_sg_description
-  set_cwgateway_sg_ingress_rules = var.set_cwgateway_sg_ingress_rules
-  set_cwgateway_sg_egress_rules  = var.set_cwgateway_sg_egress_rules
-  get_vpc_id                     = module.aws_vpc.vpc_id
+  source                           = "./modules/aws/sg"
+  set_username_prefix              = var.set_username_prefix
+  set_cw_endpoint_sg_name          = var.set_cw_endpoint_sg_name
+  set_cw_endpoint_sg_description   = var.set_cw_endpoint_sg_description
+  set_cw_endpoint_sg_ingress_rules = var.set_cw_endpoint_sg_ingress_rules
+  set_cw_endpoint_sg_egress_rules  = var.set_cw_endpoint_sg_egress_rules
+  get_vpc_id                       = module.aws_vpc.vpc_id
 }
 
 ########################################################################################################################
