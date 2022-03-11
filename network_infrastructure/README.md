@@ -15,9 +15,10 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_s3"></a> [s3](#module\_s3) | ./modules/aws/s3 | n/a |
-| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | n/a |
-| <a name="module_vpc_endpoints"></a> [vpc_endpoints](#module\_vpc\_endpoints) | ./modules/aws/vpc_endpoints | n/a |
+| <a name="module_s3"></a> [aws_s3](#module\_aws_s3) | ./modules/aws/s3 | n/a |
+| <a name="module_s3"></a> [aws_sg](#module\_aws_s3) | ./modules/aws/sg | n/a |
+| <a name="module_vpc"></a> [aws_vpc](#module\_aws_vpc) | terraform-aws-modules/vpc/aws | n/a |
+| <a name="module_vpc_endpoints"></a> [aws_vpc_endpoints](#module\_vpc\_endpoints) | ./modules/aws/vpc_endpoints | n/a |
 
 <!-- ## Resources
 
@@ -71,6 +72,7 @@ No resources. -->
 | <a name="output_s3_bucket_acl"></a> [s3\_bucket\_acl](#output\_s3\_bucket\_acl) | The canned ACL applied to the bucket |
 | <a name="output_s3_bucket_region"></a> [s3\_bucket\_region](#output\_s3\_bucket\_region) | The AWS region this bucket resides in |
 | <a name="output_s3_bucket_regional_domain_name"></a> [s3\_bucket\_regional\_domain\_name](#output\_s3\_bucket\_regional\_domain\_name) | The bucket region-specific domain name |
+| <a name="output_cwlogs_gateway_endpoint_sg_id"></a> [cwlogs\_gateway\_endpoint\_sg\_id](#output\_s3\_gateway\_endpoint\_id) | The ID of the security group |
 | <a name="output_s3_gateway_endpoint_id"></a> [s3\_gateway\_endpoint\_id](#output\_s3\_gateway\_endpoint\_id) | The ID of the VPC endpoint |
 | <a name="output_cwlogs_gateway_endpoint_id"></a> [cw\_gateway\_endpoint\_id](#output\_cw\_gateway\_endpoint\_id) | The ID of the VPC endpoint |
 <!-- END_TF_DOCS -->
