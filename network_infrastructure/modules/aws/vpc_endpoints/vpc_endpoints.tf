@@ -66,7 +66,7 @@ resource "aws_vpc_endpoint" "cw_interface_endpoint" {
   vpc_endpoint_type  = "Interface"
   security_group_ids = [var.get_cw_endpoint_sg_id]
   policy             = data.aws_iam_policy_document.cw_interface_policy_content.json
-  subnet_ids         = [concat(var.get_private_subnet_ids, var.get_public_subnet_ids)]
+  subnet_ids         = concat(var.get_private_subnet_ids, var.get_public_subnet_ids)
   auto_accept        = true
   tags               = var.set_custom_tags
 }
