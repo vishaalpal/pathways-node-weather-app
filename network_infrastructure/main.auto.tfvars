@@ -34,20 +34,20 @@ set_s3_bucket_name = "vishaalpal-pathways-node-weather-app"
 ########################################################################################################################
 set_ecr_bucket_arn      = "arn:aws:s3:::prod-eu-west-1-starport-layer-bucket"
 set_s3_gateway_endpoint = "com.amazonaws.eu-west-1.s3"
-set_cw_gateway_endpoint = "com.amazonaws.eu-west-1.logs"
+set_cw_interface_endpoint = "com.amazonaws.eu-west-1.logs"
 
 ########################################################################################################################
 ### aws_sg module variable values
 ########################################################################################################################
-set_cwgateway_sg_name        = "cwlogs_gateway_endpoint_sg"
-set_cwgateway_sg_description = "Allow incoming HTTPS traffic from VPC"
-set_cwgateway_sg_ingress_rules = [{
+set_cw_endpoint_sg_name        = "cwlogs_gateway_endpoint_sg"
+set_cw_endpoint_sg_description = "Allow incoming HTTPS traffic from VPC"
+set_cw_endpoint_sg_ingress_rules = [{
   from     = 443
   to       = 443
   protocol = "tcp"
   cidr     = ["0.0.0.0/0"]
 }]
-set_cwgateway_sg_egress_rules = [{
+set_cw_endpoint_sg_egress_rules = [{
   from     = 0
   to       = 0
   protocol = "-1"

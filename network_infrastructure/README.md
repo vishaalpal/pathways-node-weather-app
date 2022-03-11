@@ -40,13 +40,13 @@ No resources. -->
 | <a name="input_enable_nat_gateway"></a> [enable\_nat\_gateway](#input\_enable\_nat\_gateway) | Should be true if you want to provision NAT Gateways for each of your private networks | `bool` | null | yes |
 | <a name="input_create_nat_gateway_per_az"></a> [create\_nat\_gateway\_per\_az](#input\_create\_nat\_gateway\_per\_az) | Should be true if you want only one NAT Gateway per availability zone. Requires `var.azs` to be set, and the number of `public_subnets` created to be greater than or equal to the number of availability zones specified in `var.azs` | `bool` | null | yes |
 | <a name="input_set_s3_bucket_name"></a> [set\_s3\_bucket\_name](#input\_set\_s3\_bucket\_name) | Specifies the name of an S3 Bucket | `string` | null | yes |
-| <a name="input_set_cwgateway_sg_name"></a> [set\_cwgateway\_sg\_name](#input\_set\_cwgateway\_sg\_name) | The name of the security group | `string` | null | yes |
-| <a name="input_set_cwgateway_sg_description"></a> [set\_cwgateway\_sg\_description](#input\_set\_cwgateway\_sg\_description) | The description of the security group | `string` | null | yes |
-| <a name="input_set_cwgateway_sg_ingress_rules"></a> [set\_cwgateway\_sg\_ingress\_rules](#input\_set\_cwgateway\_sg\_ingress\_rules) | Specifies ingress rules for a security group | <pre>list(object({<br>  from = number<br>  to = number<br>  protocol = string<br>  cidr = list(string)<br>))}</pre> | null | yes |
-| <a name="input_set_cwgateway_sg_egress_rules"></a> [set\_cwgateway\_sg\_egress\_rules](#input\_set\_cwgateway\_sg\_egress\_rules) | Specifies egress rules for a security group | <pre>list(object({<br>  from = number<br>  to = number<br>  protocol = string<br>  cidr = list(string)<br>))}</pre> | null | yes |
+| <a name="input_set_cw_endpoint_sg_name"></a> [set\_cw\_endpoint\_sg\_name](#input\_set\_cw\_endpoint\_sg\_name) | The name of the security group | `string` | null | yes |
+| <a name="input_set_cw_endpoint_sg_description"></a> [set\_cw\_endpoint\_sg\_description](#input\_set\_cw\_endpoint\_sg\_description) | The description of the security group | `string` | null | yes |
+| <a name="input_set_cw_endpoint_sg_ingress_rules"></a> [set\_cw\_endpoint\_sg\_ingress\_rules](#input\_set\_cw\_endpoint\_sg\_ingress\_rules) | Specifies ingress rules for a security group | <pre>list(object({<br>  from = number<br>  to = number<br>  protocol = string<br>  cidr = list(string)<br>))}</pre> | null | yes |
+| <a name="input_set_cw_endpoint_sg_egress_rules"></a> [set\_cw\_endpoint\_sg\_egress\_rules](#input\_set\_cw\_endpoint\_sg\_egress\_rules) | Specifies egress rules for a security group | <pre>list(object({<br>  from = number<br>  to = number<br>  protocol = string<br>  cidr = list(string)<br>))}</pre> | null | yes |
 | <a name="input_set_ecr_bucket_arn"></a> [set\_ecr\_bucket_arn](#input\_set\_ecr\_bucket_arn) | Specifies the bucket ARN for the ECR service | `string` | null | yes |
 | <a name="input_set_s3_gateway_endpoint"></a> [set\_s3\_gateway\_endpoint](#input\_set\_s3\_gateway\_endpoint) | Specifies the service name for the gateway endpoint | `string` | null | yes |
-| <a name="input_set_cw_gateway_endpoint"></a> [set\_cw\_gateway\_endpoint](#input\_set\_cw\_gateway\_endpoint) | Specifies the service name for the gateway endpoint | `string` | null | yes |
+| <a name="input_set_cw_interface_endpoint"></a> [set\_cw\_interface\_endpoint](#input\_set\_cw\_interface\_endpoint) | Specifies the service name for the interface endpoint | `string` | null | yes |
 
 ## Outputs
 
@@ -72,7 +72,7 @@ No resources. -->
 | <a name="output_s3_bucket_acl"></a> [s3\_bucket\_acl](#output\_s3\_bucket\_acl) | The canned ACL applied to the bucket |
 | <a name="output_s3_bucket_region"></a> [s3\_bucket\_region](#output\_s3\_bucket\_region) | The AWS region this bucket resides in |
 | <a name="output_s3_bucket_regional_domain_name"></a> [s3\_bucket\_regional\_domain\_name](#output\_s3\_bucket\_regional\_domain\_name) | The bucket region-specific domain name |
-| <a name="output_cwlogs_gateway_endpoint_sg_id"></a> [cwlogs\_gateway\_endpoint\_sg\_id](#output\_s3\_gateway\_endpoint\_id) | The ID of the security group |
+| <a name="output_cw_endpoint_sg_id"></a> [cw\_endpoint\_sg\_id](#output\_cw\_endpoint\_sg\_id) | The ID of the security group |
 | <a name="output_s3_gateway_endpoint_id"></a> [s3\_gateway\_endpoint\_id](#output\_s3\_gateway\_endpoint\_id) | The ID of the VPC endpoint |
-| <a name="output_cwlogs_gateway_endpoint_id"></a> [cw\_gateway\_endpoint\_id](#output\_cw\_gateway\_endpoint\_id) | The ID of the VPC endpoint |
+| <a name="output_cw_interface_endpoint_id"></a> [cw\_interface\_endpoint\_id](#output\_cw\_interface\_endpoint\_id) | The ID of the VPC endpoint |
 <!-- END_TF_DOCS -->

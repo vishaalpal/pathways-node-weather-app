@@ -86,19 +86,19 @@ variable "set_s3_bucket_name" {
 ########################################################################################################################
 ### aws_sg module variables
 ########################################################################################################################
-variable "set_cwgateway_sg_name" {
+variable "set_cw_endpoint_sg_name" {
   type        = string
   description = "The name of the security group"
   default     = null
 }
 
-variable "set_cwgateway_sg_description" {
+variable "set_cw_endpoint_sg_description" {
   type        = string
   description = "The description of the security group"
   default     = null
 }
 
-variable "set_cwgateway_sg_ingress_rules" {
+variable "set_cw_endpoint_sg_ingress_rules" {
   type = list(object({
     from     = number
     to       = number
@@ -109,7 +109,7 @@ variable "set_cwgateway_sg_ingress_rules" {
   default     = null
 }
 
-variable "set_cwgateway_sg_egress_rules" {
+variable "set_cw_endpoint_sg_egress_rules" {
   type = list(object({
     from     = number
     to       = number
@@ -129,9 +129,9 @@ variable "set_s3_gateway_endpoint" {
   default     = null
 }
 
-variable "set_cw_gateway_endpoint" {
+variable "set_cw_interface_endpoint" {
   type        = string
-  description = "Specifies the service name for the gateway endpoint"
+  description = "Specifies the service name for the interface endpoint"
   default     = null
 }
 

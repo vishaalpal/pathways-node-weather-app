@@ -111,9 +111,9 @@ output "s3_bucket_regional_domain_name" {
 ########################################################################################################################
 ### aws_sg module outputs
 ########################################################################################################################
-output "cwlogs_gateway_endpoint_sg_id" {
+output "cw_endpoint_sg_id" {
   description = "The ID of the security group"
-  value       = module.aws_sg.cwlogs_gateway_endpoint_sg_id
+  value       = module.aws_sg.cw_endpoint_sg_id
 }
 
 ########################################################################################################################
@@ -124,7 +124,7 @@ output "s3_gateway_endpoint_id" {
   value       = module.aws_vpc_endpoints.s3_gateway_endpoint_id
 }
 
-output "cwlogs_gateway_endpoint_id" {
+output "cw_interface_endpoint_id" {
   description = "The ID of the VPC endpoint"
-  value       = module.aws_vpc_endpoints.cwlogs_gateway_endpoint_id
+  value       = module.aws_vpc_endpoints.cw_interface_endpoint_id
 }
