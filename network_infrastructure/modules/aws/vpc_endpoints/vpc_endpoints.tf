@@ -10,6 +10,7 @@ variable "get_vpc_id" {}
 variable "get_vpc_cidr_block" {}
 variable "get_public_route_table_ids" {}
 variable "get_private_route_table_ids" {}
+variable "get_cwlogs_gateway_endpoint_sg_id" {}
 
 ########################################################################################################################
 ### Create resources
@@ -48,29 +49,6 @@ data "aws_iam_policy_document" "cw_gateway_policy_content" {
   }
 }
 
-resource "aws_security_group" "cwlogs_gateway_endpoint_sg" {
-  name        = "cwlogs_gateway_endpoint_sg"
-  description = "Allow TLS inbound traffic"
-  vpc_id      = var.get_vpc_id
-
-  ingress {
-    description = "Allow all traffic from VPC"
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = [var.get_vpc_cidr_block]
-  }
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  tags = {
-    Name = "cwlogs_gateway_endpoint_sg"
-  }
-}
-
 resource "aws_vpc_endpoint" "s3_gateway_endpoint" {
   service_name      = var.set_s3_gateway_endpoint
   vpc_id            = var.get_vpc_id
@@ -84,7 +62,7 @@ resource "aws_vpc_endpoint" "cwlogs_gateway_endpoint" {
   service_name       = var.set_cw_gateway_endpoint
   vpc_id             = var.get_vpc_id
   vpc_endpoint_type  = "Interface"
-  security_group_ids = [aws_security_group.cwlogs_gateway_endpoint_sg.id]
+  security_group_ids = [var.get_cwlogs_gateway_endpoint_sg_id]
   policy             = data.aws_iam_policy_document.cw_gateway_policy_content.json
   auto_accept        = true
   tags               = var.set_custom_tags

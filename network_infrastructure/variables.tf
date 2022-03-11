@@ -84,6 +84,43 @@ variable "set_s3_bucket_name" {
 }
 
 ########################################################################################################################
+### aws_sg module variables
+########################################################################################################################
+variable "set_cwgateway_sg_name" {
+  type        = string
+  description = "The name of the security group"
+  default     = null
+}
+
+variable "set_cwgateway_sg_description" {
+  type        = string
+  description = "The description of the security group"
+  default     = null
+}
+
+variable "set_cwgateway_sg_ingress_rules" {
+  type = list(object({
+    from     = number
+    to       = number
+    protocol = string
+    cidr     = list(string)
+  }))
+  description = "Specifies ingress rules for a security group"
+  default     = null
+}
+
+variable "set_cwgateway_sg_egress_rules" {
+  type = list(object({
+    from     = number
+    to       = number
+    protocol = string
+    cidr     = list(string)
+  }))
+  description = "Specifies egress rules for a security group"
+  default     = null
+}
+
+########################################################################################################################
 ### aws_vpc_endpoints module variables
 ########################################################################################################################
 variable "set_s3_gateway_endpoint" {
@@ -99,7 +136,8 @@ variable "set_cw_gateway_endpoint" {
 }
 
 variable "set_ecr_bucket_arn" {
-  type = string
+  type        = string
   description = "Specifies the bucket ARN for the ECR service"
-  default = null
+  default     = null
 }
+
