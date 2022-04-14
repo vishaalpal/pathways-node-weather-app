@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   workflow_run:
     workflows:
-    - "build_weather_app"
+      - "build_weather_app"
     branches:
       - master
     types:
